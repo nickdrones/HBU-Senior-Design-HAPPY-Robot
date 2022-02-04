@@ -71,7 +71,13 @@ print("Connection with PCA9685 Established")
 
 print("Initialization Complete")
 print("")
-
+print("██████╗ ███████╗ █████╗ ██████╗ ██╗   ██╗")
+print("██╔══██╗██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝")
+print("██████╔╝█████╗  ███████║██║  ██║ ╚████╔╝ ")
+print("██╔══██╗██╔══╝  ██╔══██║██║  ██║  ╚██╔╝  ")
+print("██║  ██║███████╗██║  ██║██████╔╝   ██║   ")
+print("╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝    ╚═╝   ")
+print("")
 
 # Servo 3: rear right
 # Servo 2: front right
