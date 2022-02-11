@@ -41,10 +41,14 @@ def stopMotor(desiredMotor):
     # This function stops a desired motor
     #   by feeding in the motor name
     #####################################
-    motorArray = arr.array("frontLeft","rearLeft","frontRight","rearRight")
-    for i in motorArray:
-        if motorArray[i] == desiredMotor:
-            kit.servo[i].angle=90
+    if desiredMotor=="frontLeft":
+        kit.servo[0].angle=90
+    if desiredMotor=="rearLeft":
+        kit.servo[1].angle=90
+    if desiredMotor=="frontRight":
+        kit.servo[2].angle=90
+    if desiredMotor=="rearRight":
+        kit.servo[3].angle=90
     return
 
 def stopAllMotors():
