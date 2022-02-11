@@ -80,6 +80,7 @@ tcpSerSock.listen(5)     # The parameter of listen() defines the number of conne
 			 # connections are full, others will be rejected. 
 
 while True:
+	stopAllMotors()
 	print('Waiting for connection...')
 	# Waiting for connection. Once receiving a connection, the function accept() returns a separate 
 	# client socket for the subsequent communication. By default, the function accept() is a blocking 
