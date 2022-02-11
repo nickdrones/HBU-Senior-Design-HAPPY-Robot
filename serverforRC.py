@@ -37,7 +37,7 @@ while True:
 		elif data == ctrl_cmd[3]:
 			print('recv right cmd')
 		else:
-			print('Command Error! Cannot recognize command: ' + data)
+			print('Command Error! Cannot recognize command: ' + str(data))
 
 tcpSerSock.close()
 
