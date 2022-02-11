@@ -61,6 +61,48 @@ def stopAllMotors():
     stopMotor("rearRight")
     return
 
+def driveChassisStraight_Ramp(percentPower,rampSpeed):
+    ####################################
+    # This function allows us to use a power
+    #  percentage value between 100% and -100%
+    #  to control the speed and direction of
+    #  the robot. Also, 0-100 can be input
+    #  to control the speed at which the
+    #  motors ramp up to full power.
+    ####################################
+    tempMotorPercent=0
+    stepAmount=percentPower/rampSpeed
+    while abs(tempMotorPercent) < abs(percentPower):
+        frontRightAngle=90-tempMotorPercent*(9/10)
+        rearRightAngle=90+tempMotorPercent*(9/10)
+        frontLeftAngle=90-tempMotorPercent*(9/10)
+        rearLeftAngle=90+tempMotorPercent*(9/10)
+        kit.servo[3].angle=rearRightAngle
+        kit.servo[2].angle=frontRightAngle
+        kit.servo[1].angle=rearLeftAngle
+        kit.servo[0].angle=frontLeftAngle
+        time.sleep(0.01)
+        tempMotorPercent+=stepAmount
+    frontRightAngle=90-percentPower*(9/10)
+    rearRightAngle=90+percentPower*(9/10)
+    frontLeftAngle=90-percentPower*(9/10)
+    rearLeftAngle=90+percentPower*(9/10)
+    kit.servo[3].angle=rearRightAngle
+    kit.servo[2].angle=frontRightAngle
+    kit.servo[1].angle=rearLeftAngle
+    kit.servo[0].angle=frontLeftAngle
+    return
+
+def stopAllMotors_Ramp():
+    ##################################
+    #  This function stops all motors
+    ##################################
+    stopMotor("frontLeft")
+    stopMotor("rearLeft")
+    stopMotor("frontRight")
+    stopMotor("rearRight")
+    return
+
 #################################################################################################################################################
 
 print("Establishing Communication with PCA9685 over I2C")
@@ -111,8 +153,8 @@ driveChassisStraight(50)
 time.sleep(1)
 stopAllMotors()
 time.sleep(1)
-driveChassisLR(50,0)
-time.sleep(1)
+driveChassisStraight_Ramp(100,100)
+time.sleep(4)
 stopAllMotors()
 time.sleep(1)
 
