@@ -93,15 +93,6 @@ def driveChassisStraight_Ramp(percentPower,rampSpeed):
     kit.servo[0].angle=frontLeftAngle
     return
 
-def stopAllMotors_Ramp():
-    ##################################
-    #  This function stops all motors
-    ##################################
-    stopMotor("frontLeft")
-    stopMotor("rearLeft")
-    stopMotor("frontRight")
-    stopMotor("rearRight")
-    return
 
 #################################################################################################################################################
 
@@ -154,7 +145,9 @@ time.sleep(1)
 stopAllMotors()
 time.sleep(1)
 driveChassisStraight_Ramp(100,50)
-time.sleep(4)
+time.sleep(2)
+driveChassisStraight_Ramp(0,50)
+time.sleep(2)
 stopAllMotors()
 time.sleep(1)
 
