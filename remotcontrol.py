@@ -18,32 +18,27 @@ tcpCliSock.connect(ADDR) # Connect with the server
 # ============================================================================= 
 def forward_fun(event):
     print('forward')
-    commandToSend = bytearray(b'forward')
-    tcpCliSock.send(commandToSend)
+    tcpCliSock.send(bytes("f", 'utf8'))
 
 def backward_fun(event):
     print('backward')
-    commandToSend = bytearray(b'backward')
-    tcpCliSock.send(commandToSend)
+    tcpCliSock.send(b"b")
 
 def left_fun(event):
     print('left')
-    commandToSend = bytearray(b'left')
-    tcpCliSock.send(commandToSend)
+    tcpCliSock.send(b"l")
 
 def right_fun(event):
     print('right')
-    commandToSend = bytearray(b'right')
-    tcpCliSock.send(commandToSend)
+    tcpCliSock.send(b"r")
 
 def stop_fun(event):
     print('stop')
-    commandToSend = bytearray(b'stop')
-    tcpCliSock.send(commandToSend)
+    tcpCliSock.send(b"s")
 
 def i_said_stop(event):
         print('STOP!!!')
-        tcpCliSock.send(b'stop')
+        tcpCliSock.send('stop')
         
 Btn0 = Button(top, width=5, text='Forward')
 Btn1 = Button(top, width=5, text='Backward')
