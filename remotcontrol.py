@@ -74,19 +74,6 @@ top.bind('<KeyRelease-s>', stop_fun)
 top.bind('<KeyRelease-w>', stop_fun)
 
 
-def changeSpeed(ev=None):
-	global spd
-	spd = speed.get()/2 #Divide % by 2 so 100% (full speed) is sent as 50. Explanation for reason in usage manual
-	print('sendData = %s' % spd)
-	tcpCliSock.send(spd+"x")  # Send the speed data to the server(Raspberry Pi)
-
-label = Label(top, text='Speed:', fg='red')  # Create a label
-label.grid(row=6, column=0)                  # Label layout
-
-speed = Scale(top, from_=0, to=100, orient=HORIZONTAL, command=changeSpeed)  # Create a scale from 0 to 100
-speed.set(50)
-speed.grid(row=6, column=1)
-
 def main():
 	top.mainloop()
 
