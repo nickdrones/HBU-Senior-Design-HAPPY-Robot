@@ -17,24 +17,29 @@ tcpCliSock.connect(ADDR) # Connect with the server
 # car move forward.
 # ============================================================================= 
 def forward_fun(event):
-	print('forward')
-	tcpCliSock.send(b'forward')
+    print('forward')
+    commandToSend = bytearray(b'forward')
+    tcpCliSock.send(commandToSend)
 
 def backward_fun(event):
-	print('backward')
-	tcpCliSock.send(b'backward')
+    print('backward')
+    commandToSend = bytearray(b'backward')
+    tcpCliSock.send(commandToSend)
 
 def left_fun(event):
-	print('left')
-	tcpCliSock.send(b'left')
+    print('left')
+    commandToSend = bytearray(b'left')
+    tcpCliSock.send(commandToSend)
 
 def right_fun(event):
-	print('right')
-	tcpCliSock.send(b'right')
+    print('right')
+    commandToSend = bytearray(b'right')
+    tcpCliSock.send(commandToSend)
 
 def stop_fun(event):
-	print('stop')
-	tcpCliSock.send(b'stop')
+    print('stop')
+    commandToSend = bytearray(b'stop')
+    tcpCliSock.send(commandToSend)
 
 def i_said_stop(event):
         print('STOP!!!')
