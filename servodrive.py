@@ -89,25 +89,31 @@ print("")
 # Servo 0: front left
 
 # Drive Forward
-kit.servo[3].angle=120
-kit.servo[2].angle=60
-kit.servo[1].angle=120
-kit.servo[0].angle=60
-
-time.sleep(1)
+#kit.servo[3].angle=120
+#kit.servo[2].angle=60
+#kit.servo[1].angle=120
+#kit.servo[0].angle=60
 
 # Drive Backward
-kit.servo[3].angle=60
-kit.servo[2].angle=120
-kit.servo[1].angle=60
-kit.servo[0].angle=120
-
-time.sleep(1)
+#kit.servo[3].angle=60
+#kit.servo[2].angle=120
+#kit.servo[1].angle=60
+#kit.servo[0].angle=120
 
 # Stop
-kit.servo[3].angle=90
-kit.servo[2].angle=90
-kit.servo[1].angle=90
-kit.servo[0].angle=90
+#kit.servo[3].angle=90
+#kit.servo[2].angle=90
+#kit.servo[1].angle=90
+#kit.servo[0].angle=90
+
+
+driveChassisStraight(50)
+time.sleep(1)
+stopAllMotors()
+time.sleep(1)
+driveChassisLR(50,-50)
+time.sleep(1)
+stopAllMotors()
+time.sleep(1)
 
 quit()
