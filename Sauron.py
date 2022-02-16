@@ -15,3 +15,6 @@ def printArray():
 
 def destroyTheRing():
     video.release()
+
+if __name__ == '__main__':
+	setup()
