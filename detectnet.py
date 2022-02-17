@@ -50,7 +50,6 @@ while True:
                 #print(detection)
                 class_desc = net.GetClassDesc(detection.ClassID)
                 print (class_desc)
-                print("/n")
 
         # render the image
         #output.Render(img)
