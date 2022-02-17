@@ -48,17 +48,13 @@ while True:
 
         for detection in detections:
                 #print(detection)
-                class_desc = net.GetClassDesc(detection.ClassID)
-                print (class_desc)
+                if (net.GetClassDesc(detection.ClassID) == "person"):
+                    class_desc = net.GetClassDesc(detection.ClassID)
+                    middlePosLR = (net.GetClassDesc(detection.Right) + net.GetClassDesc(detection.Left)) /2
+                    middlePosTB = (net.GetClassDesc(detection.Top) + net.GetClassDesc(detection.Bottom)) /2
+                    print ("Detected " + class_desc + " at coordinates " + middlePosLR + "," + middlePosTB)
 
-        # render the image
-        #output.Render(img)
 
-        # update the title bar
-        #output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
-
-        # print out performance info
-        #net.PrintProfilerTimes()
 
         # exit on input/output EOS
         if not input.IsStreaming() or not output.IsStreaming():
