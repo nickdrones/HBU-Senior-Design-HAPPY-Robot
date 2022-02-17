@@ -50,6 +50,7 @@ while True:
                 #print(detection)
                 class_desc = net.GetClassDesc(detection.ClassID)
                 print (class_desc)
+                print("/n")
 
         # render the image
         #output.Render(img)
@@ -58,7 +59,7 @@ while True:
         #output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
 
         # print out performance info
-        net.PrintProfilerTimes()
+        #net.PrintProfilerTimes()
 
         # exit on input/output EOS
         if not input.IsStreaming() or not output.IsStreaming():
