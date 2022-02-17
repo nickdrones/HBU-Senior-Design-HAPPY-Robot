@@ -48,7 +48,7 @@ while True:
 
         for detection in detections:
                 #print(detection)
-                class_desc = net.GetClassDesc(detection)
+                class_desc = net.GetClassDesc(detection.ClassID)
                 print (class_desc)
 
         # render the image
