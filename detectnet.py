@@ -50,8 +50,8 @@ while True:
                 if (net.GetClassDesc(detection.ClassID) == "person"):
                     #print(detection)
                     class_desc = net.GetClassDesc(detection.ClassID)
-                    middlePos = net.GetClassDesc(detection.Center)
-                    print ("Detected " + class_desc + " at coordinates " + middlePos)
+                    print ("Detected " + class_desc)
+                    print(net.GetClassDesc(detection.Center))
 
 
 
