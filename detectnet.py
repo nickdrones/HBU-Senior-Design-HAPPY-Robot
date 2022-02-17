@@ -49,9 +49,10 @@ while True:
         for detection in detections:
                 if (net.GetClassDesc(detection.ClassID) == "person"):
                     #print(detection)
+                    lines = detection.split("\n")
+                    line_11 = lines[10]
                     class_desc = net.GetClassDesc(detection.ClassID)
-                    print ("Detected " + class_desc)
-                    print(net.GetClassDesc(detection.Center))
+                    print ("Detected " + class_desc + line_11)
 
 
 
