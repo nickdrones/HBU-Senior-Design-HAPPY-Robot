@@ -5,7 +5,7 @@ import Yoda
 import time
 
 
-#Hermes.setup
+Hermes.setup
 #Sauron.setup
 #Navi.setup
 #Yoda.setup
