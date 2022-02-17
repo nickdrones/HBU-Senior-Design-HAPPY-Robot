@@ -48,11 +48,10 @@ while True:
 
         for detection in detections:
                 if (net.GetClassDesc(detection.ClassID) == "person"):
-                    print(detection)
-                    #class_desc = net.GetClassDesc(detection.ClassID)
-                    #middlePosLR = (net.GetClassDesc(detection.Right) + net.GetClassDesc(detection.Left)) /2
-                    #middlePosTB = (net.GetClassDesc(detection.Top) + net.GetClassDesc(detection.Bottom)) /2
-                    #print ("Detected " + class_desc + " at coordinates " + middlePosLR + "," + middlePosTB)
+                    #print(detection)
+                    class_desc = net.GetClassDesc(detection.ClassID)
+                    middlePos = net.GetClassDesc(detection.Center)
+                    print ("Detected " + class_desc + " at coordinates " + middlePos)
 
 
 
