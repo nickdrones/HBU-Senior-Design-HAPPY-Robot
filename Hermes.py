@@ -2,10 +2,12 @@
 from adafruit_servokit import ServoKit
 import time
 import array as arr
+kit = None
+leftSpeed = None
+rightSpeed = None
 
 def setup():
     print("Establishing Communication with PCA9685 over I2C")
-    global kit, leftSpeed, rightSpeed
     kit = ServoKit(channels=16)
     print("Connection with PCA9685 Established")
 

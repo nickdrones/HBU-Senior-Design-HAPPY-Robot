@@ -5,10 +5,10 @@ import Yoda
 import time
 
 
-Hermes.setup
-Sauron.setup
-Navi.setup
-Yoda.setup
+#Hermes.setup
+#Sauron.setup
+#Navi.setup
+#Yoda.setup
 
 print("Initialization Complete")
 print("")
@@ -22,11 +22,12 @@ print("")
 
 ###################################################################################################
 
-Hermes.driveChassisStraight(100)
+#Hermes.driveChassisStraight(100)
 
-time.sleep(1)
 
-Hermes.stopAllMotors
+time.sleep(100)
 
-Sauron.destroyTheRing
+#Hermes.stopAllMotors
+
+#Sauron.destroyTheRing
 quit()
