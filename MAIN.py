@@ -22,12 +22,12 @@ print("")
 
 ###################################################################################################
 
-#Hermes.driveChassisStraight(100)
+Hermes.driveChassisStraight(100)
 
 
-time.sleep(100)
+time.sleep(1)
 
-#Hermes.stopAllMotors
+Hermes.stopAllMotors
 
 #Sauron.destroyTheRing
 quit()
