@@ -2,10 +2,10 @@
 from adafruit_servokit import ServoKit
 import time
 import array as arr
-global kit, leftSpeed, rightSpeed
 
 def setup():
     print("Establishing Communication with PCA9685 over I2C")
+    global kit, leftSpeed, rightSpeed
     kit = ServoKit(channels=16)
     print("Connection with PCA9685 Established")
 
@@ -101,4 +101,3 @@ def driveChassisStraight_Ramp(percentPower,rampSpeed):
 
 if __name__ == '__main__':
 	setup()
-	stopAllMotors()
