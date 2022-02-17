@@ -45,14 +45,17 @@ while True:
         # print the detections
         print("detected {:d} objects in image".format(len(detections)))
 
+
         for detection in detections:
-                print(detection)
+                #print(detection)
+                class_desc = net.GetClassDesc(detection)
+                print (class_desc)
 
         # render the image
-        output.Render(img)
+        #output.Render(img)
 
         # update the title bar
-        output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
+        #output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
 
         # print out performance info
         net.PrintProfilerTimes()
