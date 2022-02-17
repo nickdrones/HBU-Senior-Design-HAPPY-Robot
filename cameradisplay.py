@@ -4,7 +4,7 @@ import nanocamera as nano
 
 if __name__ == '__main__':
     # Create the Camera instance
-    camera = nano.Camera(flip=2, width=640, height=480, fps=30)
+    camera = nano.Camera(flip=2, width=1280, height=720, fps=60)
     print('CSI Camera ready? - ', camera.isReady())
     while camera.isReady():
         try:
