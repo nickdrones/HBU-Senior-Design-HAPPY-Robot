@@ -1,5 +1,6 @@
 import jetson.inference
 import jetson.utils
+import re
 
 import argparse
 import sys
@@ -33,6 +34,8 @@ net = jetson.inference.detectNet(opt.network, sys.argv, opt.threshold)
 # create video sources
 input = jetson.utils.videoSource(opt.input_URI, argv=sys.argv)
 
+x_coords = 0
+y_coords = 0
 
 # process frames until the user exits
 while True:
@@ -49,11 +52,21 @@ while True:
         for detection in detections:
                 if (net.GetClassDesc(detection.ClassID) == "person"):
                     #print(detection)
+                    # format: left of screen = "   -- Center:  (101.094, 447.1)"
+                    # format: right of screen = "   -- Center:  (1146.88, 393.514)"
                     detectionString = str(detection)
                     lines = detectionString.split("\n")
                     line_11 = lines[10]
+                    m = re.search('((.+?),', line_11)
+                    if m:
+                            found = m.group(1)
+                    x_coords = found
+                    m = re.search(',(.+?))', line_11)
+                    if m:
+                            found = m.group(1)
+                    y_coords = found
                     class_desc = net.GetClassDesc(detection.ClassID)
-                    print ("Detected " + class_desc + line_11)
+                    print ("Detected " + class_desc + x_coords + " " + y_coords)
 
 
 
