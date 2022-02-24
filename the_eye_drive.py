@@ -1,6 +1,8 @@
 import jetson.inference
 import jetson.utils
 from adafruit_servokit import ServoKit
+import time
+
 
 import argparse
 import sys
@@ -34,9 +36,8 @@ parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre
 parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
 parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use")
 
-#is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
+is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
 
-is_headless=["--headless"]
 try:
         opt = parser.parse_known_args()[0]
 except:
@@ -51,6 +52,8 @@ kit=ServoKit(channels=16)
 
 print("Connection with PCA9685 Established")
 
+time.sleep(2)
+
 print("Establishing computer vision, this may take up to 30 seconds (~10 minutes for first time boot)")
 
 # create video output object
@@ -62,6 +65,14 @@ net = jetson.inference.detectNet(opt.network, sys.argv, opt.threshold)
 # create video sources
 input = jetson.utils.videoSource(opt.input_URI, argv=sys.argv)
 
+
+
+#perform first img read
+img = input.Capture()
+# detect objects in the image (with overlay)
+detections = net.Detect(img, overlay=opt.overlay)
+
+print("")
 print("Initialization Complete")
 print("")
 print("██████╗ ███████╗ █████╗ ██████╗ ██╗   ██╗")
