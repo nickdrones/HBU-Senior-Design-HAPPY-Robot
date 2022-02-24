@@ -8,6 +8,7 @@ import signal
 
 def keyboardInterruptHandler(signal, frame):
     print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
+    print("Stopping Motors")
     driveChassisLR(0, 0)
     exit(0)
 
@@ -138,7 +139,8 @@ while True:
                         driveChassisLR(100, 50)
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
-                    else:
+                        driveChassisLR(100, 100)
+                    if(net.GetClassDesc(detection.ClassID) != "person"):
                         driveChassisLR(0, 0)
 
 
