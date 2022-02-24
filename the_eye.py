@@ -62,8 +62,8 @@ while True:
                     temp_found_arr = line_11.split('(')
                     temp_found = temp_found_arr[1]
                     temp_found_x_coords = temp_found.split(', ')
-                    x_coords = int(temp_found_x_coords[0])
-                    y_coords = int(temp_found_x_coords[1].split(')')[0])
+                    x_coords = float(temp_found_x_coords[0])
+                    y_coords = float(temp_found_x_coords[1].split(')')[0])
                     
                     class_desc = net.GetClassDesc(detection.ClassID)
                     print ("Detected person at" +  + x_coords + " " + y_coords)
