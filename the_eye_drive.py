@@ -140,8 +140,14 @@ while True:
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
                         driveChassisLR(100, 100)
-                if(net.GetClassDesc(detection.ClassID) != "person"):
-                        driveChassisLR(0, 0)
+        person_spotted = False
+        for detection in detections:
+                if (net.GetClassDesc(detection.ClassID) == "person"):
+                        person_spotted = True
+        if(person_spotted==False):
+                driveChassisLR(0, 0)
+                
+                        
 
 
 
