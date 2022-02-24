@@ -72,12 +72,12 @@ while True:
                     y_coords = float(y_coords)
 
                     if (x_coords < 540):
-                            print("slight left")
-                            print("")
+                        print("slight left")
+                        print("")
                     elif (x_coords > 740):
                         print("slight right")
                         print("")
-                    elif (x_coords >= 540 & x_coords <= 740):
+                    elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
                         print("")
 
