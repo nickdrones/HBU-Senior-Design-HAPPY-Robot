@@ -10,16 +10,6 @@
     },
     "list": [
       {
-        "max-width": "1200px",
-        "width": "993px",
-        "height": "3000px"
-      },
-      {
-        "max-width": "992px",
-        "width": "769px",
-        "height": "1024px"
-      },
-      {
         "max-width": "768px",
         "width": "577px",
         "height": "800px"
