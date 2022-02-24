@@ -122,10 +122,14 @@ while True:
 
                     if (x_coords < 540):
                         print("slight left")
+                        driveChassisLR(50, 100)
                     elif (x_coords > 740):
                         print("slight right")
+                        driveChassisLR(100, 50)
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
+                    else:
+                        driveChassisLR(0, 0)
 
 
 
