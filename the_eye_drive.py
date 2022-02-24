@@ -133,13 +133,13 @@ while True:
 
                     if (x_coords < 540):
                         print("slight left")
-                        driveChassisLR(50, 100)
+                        driveChassisLR(20, 50)
                     elif (x_coords > 740):
                         print("slight right")
-                        driveChassisLR(100, 50)
+                        driveChassisLR(50, 20)
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
-                        driveChassisLR(100, 100)
+                        driveChassisLR(50, 50)
         person_spotted = False
         for detection in detections:
                 if (net.GetClassDesc(detection.ClassID) == "person"):
