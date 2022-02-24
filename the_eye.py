@@ -66,7 +66,7 @@ while True:
                     y_coords = float(temp_found_x_coords[1].split(')')[0])
                     
                     class_desc = net.GetClassDesc(detection.ClassID)
-                    print ("Detected person at" +  + x_coords + " " + y_coords)
+                    print ("Detected person at" +  + str(x_coords) + " " + str(y_coords))
                     if (x_coords < 540):
                             print("slight left")
                             print("")
