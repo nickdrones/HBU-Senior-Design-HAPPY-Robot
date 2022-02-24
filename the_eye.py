@@ -46,7 +46,7 @@ while True:
         detections = net.Detect(img, overlay=opt.overlay)
 
         # print the detections
-        print("detected {:d} objects in image".format(len(detections)))
+        #print("detected {:d} objects in image".format(len(detections)))
 
 
         for detection in detections:
@@ -73,13 +73,12 @@ while True:
 
                     if (x_coords < 540):
                         print("slight left")
-                        print("")
                     elif (x_coords > 740):
                         print("slight right")
-                        print("")
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
-                        print("")
+                else:
+                        print("No person seen")
 
 
 
