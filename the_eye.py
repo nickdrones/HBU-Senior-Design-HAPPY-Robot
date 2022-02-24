@@ -57,14 +57,14 @@ while True:
                     detectionString = str(detection)
                     lines = detectionString.split("\n")
                     line_11 = lines[10]
-                    m = re.search('((.+?),', line_11)
-                    if m:
-                            found = m.group(1)
-                    x_coords = found
-                    m = re.search(',(.+?))', line_11)
-                    if m:
-                            found = m.group(1)
-                    y_coords = found
+
+                    # Split the line up between the parenthesis and comma and write to variables for X and Y pos
+                    temp_found_arr = line_11.split('(')
+                    temp_found = temp_found_arr[1]
+                    temp_found_x_coords = temp_found.split(',')
+                    x_coords = temp_found_x_coords[0]
+                    y_coords = temp_found_x_coords[1].split(')')
+                    
                     class_desc = net.GetClassDesc(detection.ClassID)
                     print ("Detected " + class_desc + x_coords + " " + y_coords)
 
