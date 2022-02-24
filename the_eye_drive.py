@@ -2,6 +2,16 @@ import jetson.inference
 import jetson.utils
 from adafruit_servokit import ServoKit
 import time
+import signal
+
+
+
+def keyboardInterruptHandler(signal, frame):
+    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
+    driveChassisLR(0, 0)
+    exit(0)
+
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 
 import argparse
