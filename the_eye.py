@@ -77,8 +77,6 @@ while True:
                         print("slight right")
                     elif (x_coords >= 540 and 740 >= x_coords):
                         print("straight ahead")
-                elif(net.GetClassDesc(detection.ClassID) != "person"):
-                        print("No person seen")
 
 
 
