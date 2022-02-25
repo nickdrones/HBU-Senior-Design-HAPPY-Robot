@@ -95,7 +95,12 @@ print("")
 def fun_func():
     while(1==1):
         time.sleep(2)
-        print(Sauron.getPersonHeading)
+        print("Thread 1")
+
+def fun_func2():
+    while(1==1):
+        time.sleep(2)
+        print("Thread 2")
     
 #t1 = Thread(target = Sauron.processFrame())
 #t2 = Thread(target = fun_func())
@@ -105,10 +110,10 @@ def fun_func():
 
 try:
    _thread.start_new_thread(fun_func)
-   _thread.start_new_thread(Sauron.processFrame())
+   _thread.start_new_thread(fun_func2)
 except:
    print ("Error: unable to start thread")
 
 
 
-#quit()
+quit()
