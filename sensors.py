@@ -15,7 +15,7 @@ class GPS_sensor:
     # instance attributes
     def __init__(self):
         self.serial_port = serial.Serial(port="/dev/ttyTHS1",baudrate=115200,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,)
-    
+        # Have to run code as sudo to access serial port, or  serial access to all accounts using this command: "sudo chmod 666 /dev/ttyTHS1"
         self.name = "Navi"
         self.lastLongitude = 0
         self.lastLatitude = 0
@@ -63,17 +63,60 @@ class primaryCamera:
 
         self.name = "Sauron"
         self.person_heading = 0
-        self.lastLatitude = 0
+        #self.lastLatitude = 0
     
-    def getLastLattitude(self):
-        return self.lastLatitude
+    def getPersonHeading(self):
+        return self.person_heading
     
     def processFrame(self):
-        #perform first img read to finalize all initialization outputs
-        img = self.input.Capture()
-        # detect objects in the image (with overlay)
-        detections = self.net.Detect(img, overlay=self.opt.overlay)
-        # TO BE FINISHED
+        while True:
+                # capture the next image
+                self.img = self.input.Capture()
+
+                # detect objects in the image (with overlay)
+                self.detections = self.net.Detect(self.img, overlay=self.opt.overlay)
+
+                # print the detections
+                #print("detected {:d} objects in image".format(len(detections)))
+
+
+                for detection in self.detections:
+                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                            #print(detection)
+                            # format: left of screen = "   -- Center:  (101.094, 447.1)"
+                            # format: right of screen = "   -- Center:  (1146.88, 393.514)"
+                            detectionString = str(detection)
+                            lines = detectionString.split("\n")
+                            line_11 = lines[10]
+
+                            # Split the line up between the parenthesis and comma and write to variables for X and Y pos
+                            temp_found_arr = line_11.split('(')
+                            temp_found = temp_found_arr[1]
+                            temp_found_x_coords = temp_found.split(', ')
+                            x_coords = temp_found_x_coords[0]
+                            y_coords = temp_found_x_coords[1].split(')')[0]
+                            
+                            class_desc = self.net.GetClassDesc(detection.ClassID)
+                            #print ("Detected person at " +  + x_coords + " " + y_coords)
+
+                            x_coords = float(x_coords)
+                            y_coords = float(y_coords)
+
+                            self.person_heading = x_coords
+
+                            if (x_coords < 540):
+                                print("slight left")
+                            elif (x_coords > 740):
+                                print("slight right")
+                            elif (x_coords >= 540 and 740 >= x_coords):
+                                print("straight ahead")
+                self.person_spotted = False
+                for detection in self.detections:
+                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                                person_spotted = True
+                if(person_spotted==False):
+                    print("nobody")
+
 
 
 
