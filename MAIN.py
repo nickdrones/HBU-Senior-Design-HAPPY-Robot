@@ -2,7 +2,8 @@ import drive_system
 import sensors
 import time
 import signal
-from threading import Thread
+#from threading import Thread
+import _thread
 
 
 ############################################################
@@ -96,12 +97,18 @@ def fun_func():
         time.sleep(2)
         print(Sauron.getPersonHeading)
     
-t1 = Thread(target = Sauron.processFrame())
-t2 = Thread(target = fun_func())
+#t1 = Thread(target = Sauron.processFrame())
+#t2 = Thread(target = fun_func())
 
-t1.start()
-t2.start()
+#t1.start()
+#t2.start()
+
+try:
+   _thread.start_new_thread(fun_func)
+   _thread.start_new_thread(Sauron.processFrame())
+except:
+   print ("Error: unable to start thread")
 
 
 
-quit()
+#quit()
