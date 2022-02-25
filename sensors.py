@@ -37,7 +37,7 @@ class primaryCamera:
     
     # instance attributes
     def __init__(self):
-        with contextlib.redirect_stdout(io.StringIO()) as f:
+        with contextlib.redirect_stderr(io.StringIO()) as f:
             parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.",
                                  formatter_class=argparse.RawTextHelpFormatter, epilog=jetson.inference.detectNet.Usage() +
                                  jetson.utils.videoSource.Usage() + jetson.utils.videoOutput.Usage() + jetson.utils.logUsage())
