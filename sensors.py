@@ -48,12 +48,13 @@ class primaryCamera:
             parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use")
             is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
             self.opt = parser.parse_known_args()[0]
+            silent_output = ["--log-level=silent"]
             # create video output object
-            self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv+is_headless)
+            self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv+is_headless+silent_output)
             # load the object detection network
-            self.net = jetson.inference.detectNet(self.opt.network, ['--log-level=silent'], self.opt.threshold)
+            self.net = jetson.inference.detectNet(self.opt.network, sys.argv+silent_output, self.opt.threshold)
             # create video sources
-            self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
+            self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv+silent_output)
 
             #perform first img read to finalize all initialization outputs
             img = self.input.Capture()
