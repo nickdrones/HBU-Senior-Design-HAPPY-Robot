@@ -51,7 +51,7 @@ class primaryCamera:
             # create video output object
             self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv+is_headless)
             # load the object detection network
-            self.net = jetson.inference.detectNet(self.opt.network, sys.argv, self.opt.threshold)
+            self.net = jetson.inference.detectNet(self.opt.network, ['--log-level=silent'], self.opt.threshold)
             # create video sources
             self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
 
