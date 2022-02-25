@@ -2,8 +2,7 @@ import drive_system
 import sensors
 import time
 import signal
-#from threading import Thread
-import _thread
+from threading import Thread
 
 
 ############################################################
@@ -97,10 +96,6 @@ def fun_func():
         time.sleep(2)
         print("Thread 1")
 
-def fun_func2():
-    while(1==1):
-        time.sleep(2)
-        print("Thread 2")
     
 #t1 = Thread(target = Sauron.processFrame())
 #t2 = Thread(target = fun_func())
@@ -108,11 +103,6 @@ def fun_func2():
 #t1.start()
 #t2.start()
 
-try:
-   _thread.start_new_thread(fun_func)
-   _thread.start_new_thread(fun_func2)
-except:
-   print ("Error: unable to start thread")
 
 
 

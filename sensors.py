@@ -69,53 +69,52 @@ class primaryCamera:
         return self.person_heading
     
     def processFrame(self):
-        while True:
-                # capture the next image
-                self.img = self.input.Capture()
+        # capture the next image
+        self.img = self.input.Capture()
 
-                # detect objects in the image (with overlay)
-                self.detections = self.net.Detect(self.img, overlay=self.opt.overlay)
+        # detect objects in the image (with overlay)
+        self.detections = self.net.Detect(self.img, overlay=self.opt.overlay)
 
-                # print the detections
-                #print("detected {:d} objects in image".format(len(detections)))
+        # print the detections
+        #print("detected {:d} objects in image".format(len(detections)))
 
 
-                for detection in self.detections:
-                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
-                            #print(detection)
-                            # format: left of screen = "   -- Center:  (101.094, 447.1)"
-                            # format: right of screen = "   -- Center:  (1146.88, 393.514)"
-                            detectionString = str(detection)
-                            lines = detectionString.split("\n")
-                            line_11 = lines[10]
+        for detection in self.detections:
+                if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                    #print(detection)
+                    # format: left of screen = "   -- Center:  (101.094, 447.1)"
+                    # format: right of screen = "   -- Center:  (1146.88, 393.514)"
+                    detectionString = str(detection)
+                    lines = detectionString.split("\n")
+                    line_11 = lines[10]
 
-                            # Split the line up between the parenthesis and comma and write to variables for X and Y pos
-                            temp_found_arr = line_11.split('(')
-                            temp_found = temp_found_arr[1]
-                            temp_found_x_coords = temp_found.split(', ')
-                            x_coords = temp_found_x_coords[0]
-                            y_coords = temp_found_x_coords[1].split(')')[0]
-                            
-                            class_desc = self.net.GetClassDesc(detection.ClassID)
-                            #print ("Detected person at " +  + x_coords + " " + y_coords)
+                    # Split the line up between the parenthesis and comma and write to variables for X and Y pos
+                    temp_found_arr = line_11.split('(')
+                    temp_found = temp_found_arr[1]
+                    temp_found_x_coords = temp_found.split(', ')
+                    x_coords = temp_found_x_coords[0]
+                    y_coords = temp_found_x_coords[1].split(')')[0]
+                    
+                    class_desc = self.net.GetClassDesc(detection.ClassID)
+                    #print ("Detected person at " +  + x_coords + " " + y_coords)
 
-                            x_coords = float(x_coords)
-                            y_coords = float(y_coords)
+                    x_coords = float(x_coords)
+                    y_coords = float(y_coords)
 
-                            self.person_heading = x_coords
+                    self.person_heading = x_coords
 
-                            if (x_coords < 540):
-                                print("slight left")
-                            elif (x_coords > 740):
-                                print("slight right")
-                            elif (x_coords >= 540 and 740 >= x_coords):
-                                print("straight ahead")
-                self.person_spotted = False
-                for detection in self.detections:
-                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
-                                person_spotted = True
-                if(person_spotted==False):
-                    print("nobody")
+                    if (x_coords < 540):
+                        print("slight left")
+                    elif (x_coords > 740):
+                        print("slight right")
+                    elif (x_coords >= 540 and 740 >= x_coords):
+                        print("straight ahead")
+        self.person_spotted = False
+        for detection in self.detections:
+                if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                        person_spotted = True
+        if(person_spotted==False):
+            print("nobody")
 
 
 
