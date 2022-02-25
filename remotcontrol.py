@@ -4,7 +4,7 @@ from socket import *      # Import necessary modules
 top = Tk()   # Create a top window
 top.title('Drive Control')
 
-HOST = '172.17.75.175'    # Server IP address
+HOST = '172.17.20.86'    # Server IP address
 PORT = 21567
 BUFSIZ = 255             # buffer size
 ADDR = (HOST, PORT)
