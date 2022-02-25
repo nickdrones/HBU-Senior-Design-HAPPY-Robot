@@ -93,8 +93,8 @@ print("")
 
 def fun_func():
     while(1==1):
-        print(Sauron.getPersonHeading)
         time.sleep(2)
+        print(Sauron.getPersonHeading)
     
 t1 = Thread(target = Sauron.processFrame())
 t2 = Thread(target = fun_func())

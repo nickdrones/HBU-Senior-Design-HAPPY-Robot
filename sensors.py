@@ -104,18 +104,18 @@ class primaryCamera:
 
                             self.person_heading = x_coords
 
-                            #if (x_coords < 540):
-                            #    print("slight left")
-                            #elif (x_coords > 740):
-                            #    print("slight right")
-                            #elif (x_coords >= 540 and 740 >= x_coords):
-                            #    print("straight ahead")
-                #self.person_spotted = False
-                #for detection in self.detections:
-                #        if (self.net.GetClassDesc(detection.ClassID) == "person"):
-                #                person_spotted = True
-                #if(person_spotted==False):
-                #    print("nobody")
+                            if (x_coords < 540):
+                                print("slight left")
+                            elif (x_coords > 740):
+                                print("slight right")
+                            elif (x_coords >= 540 and 740 >= x_coords):
+                                print("straight ahead")
+                self.person_spotted = False
+                for detection in self.detections:
+                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                                person_spotted = True
+                if(person_spotted==False):
+                    print("nobody")
 
 
 
