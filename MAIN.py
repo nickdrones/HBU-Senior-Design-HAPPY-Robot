@@ -2,7 +2,7 @@ import drive_system
 import sensors
 import time
 import signal
-from threading import thread
+from threading import Thread
 
 
 ############################################################
@@ -96,8 +96,8 @@ def fun_func():
         print(Sauron.getPersonHeading)
         time.sleep(2)
     
-t1 = thread(target = Sauron.processFrame())
-t2 = thread(target = fun_func())
+t1 = Thread(target = Sauron.processFrame())
+t2 = Thread(target = fun_func())
 
 t1.start()
 t2.start()
