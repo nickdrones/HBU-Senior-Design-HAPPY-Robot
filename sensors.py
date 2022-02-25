@@ -63,10 +63,10 @@ class primaryCamera:
 
         self.name = "Sauron"
         self.person_heading = 0
-        self.lastLatitude = 0
+        #self.lastLatitude = 0
     
-    def getLastLattitude(self):
-        return self.lastLatitude
+    def getPersonHeading(self):
+        return self.person_heading
     
     def processFrame(self):
         while True:
@@ -102,18 +102,20 @@ class primaryCamera:
                             x_coords = float(x_coords)
                             y_coords = float(y_coords)
 
-                            if (x_coords < 540):
-                                print("slight left")
-                            elif (x_coords > 740):
-                                print("slight right")
-                            elif (x_coords >= 540 and 740 >= x_coords):
-                                print("straight ahead")
-                self.person_spotted = False
-                for detection in self.detections:
-                        if (self.net.GetClassDesc(detection.ClassID) == "person"):
-                                person_spotted = True
-                if(person_spotted==False):
-                    print("nobody")
+                            self.person_heading = x_coords
+
+                            #if (x_coords < 540):
+                            #    print("slight left")
+                            #elif (x_coords > 740):
+                            #    print("slight right")
+                            #elif (x_coords >= 540 and 740 >= x_coords):
+                            #    print("straight ahead")
+                #self.person_spotted = False
+                #for detection in self.detections:
+                #        if (self.net.GetClassDesc(detection.ClassID) == "person"):
+                #                person_spotted = True
+                #if(person_spotted==False):
+                #    print("nobody")
 
 
 
