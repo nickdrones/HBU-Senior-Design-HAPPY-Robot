@@ -3,7 +3,11 @@ from adafruit_servokit import ServoKit
 import time
 
 class Chassis:
-    
+# Servo 3: rear right
+# Servo 2: front right
+# Servo 1: rear left
+# Servo 0: front left
+
     # instance attributes
     def __init__(self):
         self.kit = ServoKit(channels=16)

@@ -17,12 +17,13 @@ I2C and PCA9685 code based off documentation here: [https://www.jetsonhacks.com/
 Drive code is written in Python 3 and uses the adafruit_servokit library. Command to install the library is below:
 > pip3 install adafruit-circuitpython-servokit
 
-Drive code can be run using the following command:
-> python3 servodrive.py
+Serial communication utilizes pyserial which can be installed using the following command:
+> sudo apt-get install python3-serial
+
+MAIN.py is the main code, run in Python3 as sudo (failing to run as sudo will result in serial port access failing)
 
 ## Coming Soon
 
 - GPS Sensor integration
 - Navigation Algorithm
-- Remote control over Wifi
 - And more!
