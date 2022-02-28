@@ -34,7 +34,7 @@ try:
             # Windows is \r\n for carriage return, line feed
             # Macintosh and Linux use \n
         #if data == "\r".encode():
-        if len(databits) > 30:
+        if len(databits) > 100:
             # For Windows boxen on the other end
             #serial_port.write("\n".encode())
             print("Complete message: ")
