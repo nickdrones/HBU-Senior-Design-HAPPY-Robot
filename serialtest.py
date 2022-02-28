@@ -21,7 +21,7 @@ try:
     #serial_port.write("UART Demonstration Program\r\n".encode())
     #serial_port.write("NVIDIA Jetson Nano Developer Kit\r\n".encode())
     databit = ""
-    serial_port.write("a")
+    serial_port.write("a".encode())
     while True:
         if serial_port.inWaiting() > 0:
             data = serial_port.read()
