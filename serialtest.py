@@ -23,21 +23,21 @@ try:
     databit = ""
     while True:
         serial_port.write("A".encode())
-        if serial_port.inWaiting() > 0:
-            data = serial_port.readline()
-            print(data)
+        bytesToRead = serial_port.inWaiting()
+        data = serial_port.read(bytesToRead)
+        print(data)
             #databit += data
             # if we get a carriage return, add a line feed too
             # \r is a carriage return; \n is a line feed
             # This is to help the tty program on the other end 
             # Windows is \r\n for carriage return, line feed
             # Macintosh and Linux use \n
-            if data == "\r".encode():
-                # For Windows boxen on the other end
-                #serial_port.write("\n".encode())
-                print("Complete message: ")
-                print(databit)
-                break
+        if data == "\r".encode():
+            # For Windows boxen on the other end
+            #serial_port.write("\n".encode())
+            print("Complete message: ")
+            print(databit)
+            break
 
 
 except KeyboardInterrupt:
