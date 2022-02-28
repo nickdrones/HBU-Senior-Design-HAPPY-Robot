@@ -26,7 +26,7 @@ try:
         if serial_port.inWaiting() > 0:
             data = serial_port.read()
             print(data)
-            databit += data
+            #databit += data
             # if we get a carriage return, add a line feed too
             # \r is a carriage return; \n is a line feed
             # This is to help the tty program on the other end 
