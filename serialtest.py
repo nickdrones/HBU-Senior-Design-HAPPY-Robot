@@ -24,7 +24,7 @@ try:
     while True:
         serial_port.write("A".encode())
         if serial_port.inWaiting() > 0:
-            data = serial_port.read()
+            data = serial_port.readLine()
             print(data)
             #databit += data
             # if we get a carriage return, add a line feed too
