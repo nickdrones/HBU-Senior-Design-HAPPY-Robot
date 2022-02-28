@@ -1,8 +1,8 @@
-#include <SparkFun_Ublox_Arduino_Library.h>
+#include <SparkFun_u-blox_GNSS_Arduino_Library.h> //http://librarymanager/All#SparkFun_u-blox_GNSS
 #include <u-blox_config_keys.h>
 #include <Wire.h> //Needed for I2C to GNSS
 
-SFE_UBLOX_GPS myGNSS;
+SFE_UBLOX_GNSS myGNSS;
 
 long lastTime = 0; //Simple local timer. Limits amount if I2C traffic to u-blox module.
 
@@ -10,7 +10,6 @@ void setup()
 {
   Serial.begin(115200);
   while (!Serial); //Wait for user to open terminal
-  Serial.println("SparkFun u-blox Example");
 
   Wire.begin();
 
@@ -35,6 +34,24 @@ void loop()
 {
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
+  incomingByte = Serial.read();
+  // send data only when you receive data:
+  if (incomingByte != 10) {
+
+    //This is for 'O' longitude
+    if (incomingByte == 79) {
+      // say what you got:
+      //Serial.print("The longitude is: ");
+      Serial.println(longitude);
+    }
+
+    //This is for 'A' latitude
+    if (incomingByte == 65) {
+      // say what you got:
+      //Serial.print("The latitude is: ");
+      Serial.println(latitude);
+    }
+  }
   if (millis() - lastTime > 1000)
   {
     lastTime = millis(); //Update the timer
@@ -60,23 +77,6 @@ void loop()
 
     //Serial.println("Please input an 'O' (for longitude) or 'A' (for latitude)");
     // read the incoming byte:
-    incomingByte = Serial.read();
-    // send data only when you receive data:
-    if (incomingByte != 10){
 
-      //This is for 'O' longitude
-      if (incomingByte == 79){
-        // say what you got:
-        Serial.print("The longitude is: ");
-        Serial.println(longitude);
-      }
-
-      //This is for 'A' latitude
-      if (incomingByte == 65){
-        // say what you got:
-        Serial.print("The latitude is: ");
-        Serial.println(latitude);
-      }
-    }
   }
 }
