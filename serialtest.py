@@ -14,7 +14,7 @@ serial_port = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
 )
 # Wait a second to let the port initialize
-time.sleep(1)
+time.sleep(2)
 
 try:
     # Send a simple header
