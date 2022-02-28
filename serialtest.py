@@ -20,12 +20,13 @@ try:
     # Send a simple header
     #serial_port.write("UART Demonstration Program\r\n".encode())
     #serial_port.write("NVIDIA Jetson Nano Developer Kit\r\n".encode())
-    databit = ""
+    databits = []
     while True:
         serial_port.write("A".encode())
         bytesToRead = serial_port.inWaiting()
         data = serial_port.read(bytesToRead)
-        print(data)
+        databits.append(data)
+        #print(data)
             #databit += data
             # if we get a carriage return, add a line feed too
             # \r is a carriage return; \n is a line feed
@@ -36,7 +37,7 @@ try:
             # For Windows boxen on the other end
             #serial_port.write("\n".encode())
             print("Complete message: ")
-            print(databit)
+            print(databits)
             break
 
 
