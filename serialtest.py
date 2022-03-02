@@ -5,7 +5,6 @@ import serial
 print("UART Demonstration Program")
 print("NVIDIA Jetson Nano Developer Kit")
 
-
 serial_port = serial.Serial(
     port="/dev/ttyTHS1",
     baudrate=115200,
@@ -22,10 +21,13 @@ try:
     #serial_port.write("NVIDIA Jetson Nano Developer Kit\r\n".encode())
     databits = []
     while True:
-        serial_port.write("A".encode())
-        bytesToRead = serial_port.inWaiting()
-        data = serial_port.read(bytesToRead)
-        databits.append(data)
+        # print(serial_port.readline())
+        serial_port.write(bytes('O','ASCII'))
+        serial_port.write(65)
+        # serial_port.write("A".encode())
+        # bytesToRead = serial_port.inWaiting()
+        # data = serial_port.read(bytesToRead)
+        # databits.append(data)
         #print(data)
             #databit += data
             # if we get a carriage return, add a line feed too
@@ -34,12 +36,12 @@ try:
             # Windows is \r\n for carriage return, line feed
             # Macintosh and Linux use \n
         #if data == "\r".encode():
-        if len(databits) > 100:
-            # For Windows boxen on the other end
-            #serial_port.write("\n".encode())
-            print("Complete message: ")
-            print(databits)
-            break
+        # if len(databits) > 100:
+            # # For Windows boxen on the other end
+            # #serial_port.write("\n".encode())
+            # print("Complete message: ")
+            # print(databits)
+            # break
 
 
 except KeyboardInterrupt:
