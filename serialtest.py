@@ -21,10 +21,7 @@ try:
     #serial_port.write("NVIDIA Jetson Nano Developer Kit\r\n".encode())
     databits = []
     while True:
-        # print(serial_port.readline())
-        serial_port.write(bytes('O','ASCII'))
-        serial_port.write(65)
-        # serial_port.write("A".encode())
+        print(serial_port.readline())
         # bytesToRead = serial_port.inWaiting()
         # data = serial_port.read(bytesToRead)
         # databits.append(data)
