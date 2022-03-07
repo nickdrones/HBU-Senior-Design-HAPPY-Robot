@@ -13,11 +13,11 @@ serial_port = serial.Serial(
 # Wait a second to let the port initialize
 time.sleep(2)
 
+# Send a simple header
+print("Start of Program")
 
 while True:
     try:
-        # Send a simple header
-        print("Start of Program")
         
         ser_bytes = serial_port.readline()
         decoded_bytes = float(ser_bytes[0:len(ser_bytes)-2].decode("utf-8"))
