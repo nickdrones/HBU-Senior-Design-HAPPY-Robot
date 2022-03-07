@@ -58,11 +58,12 @@ void loop()
 
     latitude = myGNSS.getLatitude();
     //Serial.print(F("Lat: "));
-    //Serial.println(latitude);
+    Serial.print(latitude);
+    Serial.print(",");
 
     longitude = myGNSS.getLongitude();
     //Serial.print(F(" Long: "));
-    //Serial.print(longitude);
+    Serial.println(longitude);
     //Serial.print(F(" (degrees * 10^-7)"));
     //Serial.println();
 
@@ -73,10 +74,9 @@ void loop()
     //Serial.print(last_lat - latitude);
     //last_lat = latitude;
     //Serial.println();
-    //Serial.println();
 
     //Serial.println("Please input an 'O' (for longitude) or 'A' (for latitude)");
-    // read the incoming byte:
+    //read the incoming byte:
 
   }
 }
