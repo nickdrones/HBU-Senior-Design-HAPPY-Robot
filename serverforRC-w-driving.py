@@ -11,9 +11,9 @@ def driveChassisLR(percentPowerLeft, percentPowerRight):
     #  to control the speed and direction of
     #  the robot for each side independently. 
     ####################################
-    frontRightAngle=90-percentPowerRight*(9/10)
+    frontRightAngle=90+percentPowerRight*(9/10)
     rearRightAngle=90+percentPowerRight*(9/10)
-    frontLeftAngle=90-percentPowerLeft*(9/10)
+    frontLeftAngle=90+percentPowerLeft*(9/10)
     rearLeftAngle=90+percentPowerLeft*(9/10)
     
     kit.servo[3].angle=rearRightAngle
