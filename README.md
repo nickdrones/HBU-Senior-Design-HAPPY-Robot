@@ -22,7 +22,9 @@ Drive code is written in Python 3 and uses the adafruit_servokit library. Comman
 Serial communication utilizes pyserial which can be installed using the following command:
 > sudo apt-get install python3-serial
 
-MAIN.py is the main code, run in Python3 as sudo (failing to run as sudo will result in serial port access failing)
+MAIN.py is the main code, run in Python3. BEFORE RUNNING, confirm persmissions for serial are set to all by running the following command:
+> sudo chmod 666 /dev/ttyTHS1
+You cannot simply run the code as root because the i2ctools Python library is not recognized if the script is run as root
 
 ## Coming Soon
 
