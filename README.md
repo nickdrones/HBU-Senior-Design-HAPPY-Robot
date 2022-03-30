@@ -31,6 +31,9 @@ You cannot simply run the code as root because the i2ctools Python library is no
 I2C devices connected can be listed by address by running the following command:
 > i2cdetect -y -r 1
 
+Web UI is python utilizing the Anvil framework which can be installed by running the following command:
+> pip3 install anvil-app-server
+
 ## Coming Soon
 
 - GPS Sensor integration
