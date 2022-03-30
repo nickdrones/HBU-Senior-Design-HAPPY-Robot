@@ -92,7 +92,8 @@ print("")
 
 
 while(1==1):
-    Mando.getHeading()
+    heading = Mando.getHeading()
+    print(heading)
     time.sleep(1)
 #    Sauron.processFrame()
 
