@@ -5,6 +5,7 @@ import serial
 import jetson.inference
 import jetson.utils
 from adafruit_servokit import ServoKit
+from i2clibraries import i2c_hmc5883l
 import argparse
 import sys
 import io
@@ -30,8 +31,50 @@ class magnetometer:
     def __init__(self):
         self.name = "Mando"
         self.tempVar=0
+        self.sensorObject = i2c_hmc5883l.i2c_hmc5883l(1)
+        self.sensorObject.setContinuousMode()
+        self.sensorObject.setDeclination(2, 15)
     def getTempVar(self):
         return self.tempVar
+    def getSensorInfo(self):
+        return str(self.sensorObject)
+    def getXaxis(self):
+        splittingString = str(self.sensorObject)
+        linesList = splittingString.split("\n")
+        chosenLine = linesList[0]
+        tempLineArr = chosenLine.split(':')
+        tempStringToReturn = tempLineArr[1].replace(" ", "")
+        return tempStringToReturn
+    def getYaxis(self):
+        splittingString = str(self.sensorObject)
+        linesList = splittingString.split("\n")
+        chosenLine = linesList[1]
+        tempLineArr = chosenLine.split(':')
+        tempStringToReturn = tempLineArr[1].replace(" ", "")
+        return tempStringToReturn
+    def getZaxis(self):
+        splittingString = str(self.sensorObject)
+        linesList = splittingString.split("\n")
+        chosenLine = linesList[2]
+        tempLineArr = chosenLine.split(':')
+        tempStringToReturn = tempLineArr[1].replace(" ", "")
+        return tempStringToReturn
+    def getHeading(self):
+        splittingString = str(self.sensorObject)
+        linesList = splittingString.split("\n")
+        chosenLine = linesList[4]
+        tempLineArr = chosenLine.split(':')
+        middleStringArr = tempLineArr[1].split('°')
+        tempStringToReturn = middleStringArr[0].replace(" ", "")
+        return tempStringToReturn
+
+
+#Axis X: 45.08
+#Axis Y: -143.52
+#Axis Z: -432.4
+#Declination: 2° 15'
+#Heading: 289° 41'
+#
 
 class primaryCamera:
     

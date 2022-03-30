@@ -91,24 +91,7 @@ print("")
 ###################################################################################################
 
 
-def fun_func():
-    while(1==1):
-        time.sleep(2)
-        print("Thread 1")
-
-def frameProc():
-    while(1==1):
-        Sauron.processFrame()
-
-    
-t1 = Thread(target = frameProc())
-t2 = Thread(target = fun_func())
-
-
-t2.start()
-t1.start()
-
-
-
+#while(1==1):
+#    Sauron.processFrame()
 
 quit()
