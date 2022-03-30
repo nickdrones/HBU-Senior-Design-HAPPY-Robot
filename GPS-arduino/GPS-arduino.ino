@@ -30,6 +30,8 @@ long longitude = 0;
 String sdata = "";
 int incomingByte = 0; // for incoming serial data
 
+const char TERMINATOR = '|';
+
 void loop()
 {
   //Query module only every second. Doing it more often will just cause I2C traffic.
@@ -56,14 +58,14 @@ void loop()
   {
     lastTime = millis(); //Update the timer
 
-    latitude = myGNSS.getLatitude();
+    //latitude = myGNSS.getLatitude();
     //Serial.print(F("Lat: "));
-    Serial.print(latitude);
-    Serial.print(",");
+    //Serial.print(latitude);
+    //Serial.print(",");
 
-    longitude = myGNSS.getLongitude();
+    //longitude = myGNSS.getLongitude();
     //Serial.print(F(" Long: "));
-    Serial.println(longitude);
+    //Serial.println(longitude);
     //Serial.print(F(" (degrees * 10^-7)"));
     //Serial.println();
 
@@ -78,5 +80,17 @@ void loop()
     //Serial.println("Please input an 'O' (for longitude) or 'A' (for latitude)");
     //read the incoming byte:
 
+    if(Serial.available() > 0)
+    {
+      //char messageBuffer[32];
+      //int size = Serial.readBytesUntil('\n', messageBuffer, 32);
+      String commandFromJetson = Serial.readStringUntil(TERMINATOR);
+
+      //confirm
+      String ackMsg = "Hello Jetson! This is what I got from you: " + commandFromJeston; //String(messageBuffer);
+
+      Serial.print(ackMsg);
+      //Serial.flush();
+    }
   }
 }

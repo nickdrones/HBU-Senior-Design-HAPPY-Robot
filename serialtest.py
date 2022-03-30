@@ -4,11 +4,16 @@ import serial
 
 
 serial_port = serial.Serial(
-    port="/dev/ttyTHS1",
-    baudrate=115200,
-    bytesize=serial.EIGHTBITS,
-    parity=serial.PARITY_NONE,
-    stopbits=serial.STOPBITS_ONE,
+    port = "/dev/ttyTHS1",
+    baudrate = 115200,
+    bytesize = serial.EIGHTBITS,
+    parity = serial.PARITY_NONE,
+    stopbits = serial.STOPBITS_ONE,
+    timeout = 5,
+    xorxoff = False,
+    rtscts = False,
+    dsrdtr = False,
+    writeTimeout = 2
 )
 # Wait a second to let the port initialize
 time.sleep(2)
@@ -18,10 +23,13 @@ print("Start of Program")
 
 while True:
     try:
-        
+        serial_port.write("Command from Jetson|".encode())
         ser_bytes = serial_port.readline()
-        decoded_bytes = float(ser_bytes[0:len(ser_bytes)-2].decode("utf-8"))
-        print(decoded_bytes)
+        if ser_bytes:
+            print(ser_bytes)        # print received data from arduinno to console
+        # decoded_bytes = float(ser_bytes[0:len(ser_bytes)-2].decode("utf-8"))
+        # print(decoded_bytes)
+        time.sleep(1)
 
         # bytesToRead = serial_port.inWaiting()
         # data = serial_port.read(bytesToRead)
@@ -40,7 +48,9 @@ while True:
         # print("Complete message: ")
         # print(databits)
         # break
-
+    except Exception as e:
+        print (e)
+        serial_port.close()
 
     except KeyboardInterrupt:
         print("Exiting Program")
