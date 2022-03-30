@@ -59,6 +59,14 @@ class magnetometer:
         tempLineArr = chosenLine.split(':')
         tempStringToReturn = tempLineArr[1].replace(" ", "")
         return tempStringToReturn
+    def getDeclination(self):
+        splittingString = str(self.sensorObject)
+        linesList = splittingString.split("\n")
+        chosenLine = linesList[3]
+        tempLineArr = chosenLine.split(':')
+        middleStringArr = tempLineArr[1].split('°')
+        tempStringToReturn = middleStringArr[0].replace(" ", "")
+        return tempStringToReturn
     def getHeading(self):
         splittingString = str(self.sensorObject)
         linesList = splittingString.split("\n")
@@ -67,14 +75,6 @@ class magnetometer:
         middleStringArr = tempLineArr[1].split('°')
         tempStringToReturn = middleStringArr[0].replace(" ", "")
         return tempStringToReturn
-
-
-#Axis X: 45.08
-#Axis Y: -143.52
-#Axis Z: -432.4
-#Declination: 2° 15'
-#Heading: 289° 41'
-#
 
 class primaryCamera:
     
