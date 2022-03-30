@@ -87,7 +87,7 @@ void loop()
       String commandFromJetson = Serial.readStringUntil(TERMINATOR);
 
       //confirm
-      String ackMsg = "Hello Jetson! This is what I got from you: " + commandFromJeston; //String(messageBuffer);
+      String ackMsg = "Hello Jetson! This is what I got from you: " + commandFromJetson; //String(messageBuffer);
 
       Serial.print(ackMsg);
       //Serial.flush();
