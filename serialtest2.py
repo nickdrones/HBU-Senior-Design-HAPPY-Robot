@@ -13,16 +13,19 @@ serial_port = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
 )
 # Wait a second to let the port initialize
-print("waiting 6 seconds")
-time.sleep(6)
-print("done waiting")
+print("waiting 10 seconds")
+time.sleep(10)
+print("done waiting, sending commands")
 
 try:
     # Send a message to the Arduino
     serial_port.write("A".encode())
-    while True:
-        if serial_port.inWaiting() > 0:
-            data = serial_port.readline().decode()
-            print(data)
+    while serial_port.inWaiting() > 0:
+        data = serial_port.readline().decode()
+        print(data)
+    serial_port.write("O".encode())
+    while serial_port.inWaiting() > 0:
+        data = serial_port.readline().decode()
+        print(data)
 except:
     print("lmao error git rekt")
