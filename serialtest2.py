@@ -20,14 +20,9 @@ print("done waiting, sending commands")
 try:
     # Send a message to the Arduino
     serial_port.write("A".encode())
-    time.sleep(1)
-    while serial_port.inWaiting() > 0:
-        data = serial_port.readline().decode()
-        print(data)
-    serial_port.write("O".encode())
-    time.sleep(1)
-    while serial_port.inWaiting() > 0:
-        data = serial_port.readline().decode()
-        print(data)
+    while True:
+        while serial_port.inWaiting() > 0:
+            data = serial_port.readline().decode()
+            print(data)
 except:
     print("lmao error git rekt")
