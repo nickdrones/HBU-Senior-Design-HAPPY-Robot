@@ -39,6 +39,7 @@ void loop()
     String commandFromJetson = Serial.readStringUntil(TERMINATOR);
     if (commandFromJetson.indexOf("O") >= 0) {Serial.println(longitude);}
     if (commandFromJetson.indexOf("A") >= 0) {Serial.println(latitude);}
+    if (commandFromJetson.indexOf("B") >= 0) {Serial.println(String(longitude) + "," + String(latitude));}
   }
   if (millis() - lastTime > 1000)
   {
