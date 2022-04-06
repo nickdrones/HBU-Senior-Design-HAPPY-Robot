@@ -13,7 +13,9 @@ serial_port = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
 )
 # Wait a second to let the port initialize
-time.sleep(1)
+print("waiting 6 seconds")
+time.sleep(6)
+print("done waiting")
 
 try:
     # Send a message to the Arduino
