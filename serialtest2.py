@@ -21,8 +21,11 @@ try:
     # Send a message to the Arduino
     serial_port.write("B".encode())
     while True:
-        while serial_port.inWaiting() > 0:
+        if serial_port.inWaiting() > 0:
             data = serial_port.readline().decode()
             print(data)
+            break
+    print("if you see me, the break worked")
+
 except:
     print("lmao error git rekt")
