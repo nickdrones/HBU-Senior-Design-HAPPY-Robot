@@ -17,6 +17,7 @@ time.sleep(1)
 
 try:
     # Send a message to the Arduino
+    serial_port.write("A".encode())
     while True:
         if serial_port.inWaiting() > 0:
             data = serial_port.readline().decode()

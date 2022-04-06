@@ -34,25 +34,41 @@ const char TERMINATOR = '|';
 
 void loop()
 {
+  if (Serial.available() > 0)
+  {
+    //char messageBuffer[32];
+    //int size = Serial.readBytesUntil('\n', messageBuffer, 32);
+    String commandFromJetson = Serial.readStringUntil(TERMINATOR);
+
+
+    //This is for 'O' longitude
+    if (commandFromJetson.indexOf("O") >= 0) {
+      Serial.println(longitude);
+      // say what you got:
+      //Serial.print("The longitude is: ");
+    }
+
+    //This is for 'A' latitude
+    if (commandFromJetson.indexOf("A") >= 0) {
+      Serial.println(latitude);
+
+      // say what you got:
+      //Serial.print("The latitude is: ");
+
+
+    }
+    //confirm
+    //String ackMsg = "Hello Jetson! This is what I got from you: " + commandFromJetson; //String(messageBuffer);
+
+    //Serial.print(ackMsg);
+    //Serial.flush();
+  }
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
-  incomingByte = Serial.read();
   // send data only when you receive data:
   //if (incomingByte != 10) {
 
-  //This is for 'O' longitude
-  //if (incomingByte == 79) {
-  // say what you got:
-  //Serial.print("The longitude is: ");
-  //}
 
-  //This is for 'A' latitude
-  //if (incomingByte == 65) {
-  // say what you got:
-  //Serial.print("The latitude is: ");
-
-
-  //}
   //}
   if (millis() - lastTime > 1000)
   {
@@ -79,19 +95,6 @@ void loop()
 
     //Serial.println("Please input an 'O' (for longitude) or 'A' (for latitude)");
     //read the incoming byte:
-    Serial.println(longitude);
-    Serial.println(latitude);
-    if (Serial.available() > 0)
-    {
-      //char messageBuffer[32];
-      //int size = Serial.readBytesUntil('\n', messageBuffer, 32);
-      String commandFromJetson = Serial.readStringUntil(TERMINATOR);
 
-      //confirm
-      String ackMsg = "Hello Jetson! This is what I got from you: " + commandFromJetson; //String(messageBuffer);
-
-      Serial.print(ackMsg);
-      //Serial.flush();
-    }
   }
 }
