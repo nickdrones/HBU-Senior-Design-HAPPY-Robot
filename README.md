@@ -34,8 +34,13 @@ I2C devices connected can be listed by address by running the following command:
 Web UI is python utilizing the Anvil framework which can be installed by running the following command:
 > pip3 install anvil-app-server
 
+We are creating the navigation algorithm by storing a list of waypoints and essentially using them as virtual "beacons" that the robot will drive between. The map of paths on campus with waypoints (W##) and destinations (D##) labeled.
+![The Map](https://raw.githubusercontent.com/nickdrones/HBU-Senior-Design-HAPPY-Robot/main/images/waypointsmap.jpg)
+
 ## Coming Soon
 
-- GPS Sensor integration
 - Navigation Algorithm
+- Voltage sensor with ADC
+- Web UI for sensor monitoring
+- Different Accounts for security
 - And more!
