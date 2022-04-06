@@ -6,7 +6,7 @@ print("NVIDIA Jetson Nano Developer Kit")
 
 
 serial_port = serial.Serial(
-    port="/dev/ttyTHS2",
+    port="/dev/ttyACM0",
     baudrate=115200,
     bytesize=serial.EIGHTBITS,
     parity=serial.PARITY_NONE,
