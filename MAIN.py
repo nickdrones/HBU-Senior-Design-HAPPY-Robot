@@ -59,7 +59,7 @@ time.sleep(1)
 
 print("Establishing Communication with GPS module over Serial")
 Navi = sensors.GPS_sensor()
-print("Serial communication established at COM port /dev/ttyTHS1")
+print("Serial communication established at COM port /dev/ttyACM0")
 print("")
 
 time.sleep(1)
@@ -92,9 +92,9 @@ print("")
 
 
 while(1==1):
-    heading = Mando.getHeading()
-    print(heading)
-    time.sleep(1)
+    combocoords = Navi.getComboCoords
+    print(combocoords)
+    time.sleep(2)
 #    Sauron.processFrame()
 
 

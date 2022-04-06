@@ -15,17 +15,39 @@ class GPS_sensor:
     
     # instance attributes
     def __init__(self):
-        self.serial_port = serial.Serial(port="/dev/ttyTHS1",baudrate=115200,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,)
+        self.serial_port = serial.Serial(port="/dev/ttyACM0",baudrate=115200,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,)
         # Have to run code as sudo to access serial port, or  serial access to all accounts using this command: "sudo chmod 666 /dev/ttyTHS1"
         self.name = "Navi"
         self.lastLongitude = 0
         self.lastLatitude = 0
+        self.comboCoords = ""
     
     def getLastLattitude(self):
+        self.serial_port.write("A".encode())
+        while True:
+            if self.serial_port.inWaiting() > 0:
+                data = self.serial_port.readline().decode()
+                self.lastLatitude = data
+                break
         return self.lastLatitude
 
     def getLastLongitude(self):
+        self.serial_port.write("O".encode())
+        while True:
+            if self.serial_port.inWaiting() > 0:
+                data = self.serial_port.readline().decode()
+                self.lastLongitude = data
+                break
         return self.lastLongitude
+ 
+    def getComboCoords(self):
+        self.serial_port.write("B".encode())
+        while True:
+            if self.serial_port.inWaiting() > 0:
+                data = self.serial_port.readline().decode()
+                self.comboCoords = data
+                break
+        return self.comboCoords
 
 class magnetometer:
     def __init__(self):
