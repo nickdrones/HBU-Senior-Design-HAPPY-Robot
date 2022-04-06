@@ -94,7 +94,7 @@ print("")
 
 
 while(1==1):
-    combocoords = Navi.getComboCoords
+    combocoords = Navi.getComboCoords()
     print(combocoords)
     time.sleep(2)
 #    Sauron.processFrame()
