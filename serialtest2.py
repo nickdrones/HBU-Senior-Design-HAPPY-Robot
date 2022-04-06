@@ -19,7 +19,7 @@ print("done waiting, sending commands")
 
 try:
     # Send a message to the Arduino
-    serial_port.write("A".encode())
+    serial_port.write("B".encode())
     while True:
         while serial_port.inWaiting() > 0:
             data = serial_port.readline().decode()
