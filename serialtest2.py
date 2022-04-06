@@ -23,9 +23,10 @@ try:
     while True:
         if serial_port.inWaiting() > 0:
             data = serial_port.readline().decode()
-            print(data)
+            datatoreturn = data
             break
     print("if you see me, the break worked")
+    print(datatoreturn)
 
 except:
     print("lmao error git rekt")
