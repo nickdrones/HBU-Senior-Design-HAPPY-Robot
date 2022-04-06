@@ -16,7 +16,7 @@ class GPS_sensor:
     # instance attributes
     def __init__(self):
         self.serial_port = serial.Serial(port="/dev/ttyACM0",baudrate=115200,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,)
-        # Have to run code as sudo to access serial port, or  serial access to all accounts using this command: "sudo chmod 666 /dev/ttyTHS1"
+        # Have to run code as sudo to access serial port, or  serial access to all accounts using this command: "sudo chmod 666 /dev/ttyACM0"
         self.name = "Navi"
         self.lastLongitude = 0
         self.lastLatitude = 0
