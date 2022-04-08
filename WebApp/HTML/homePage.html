@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<title>Inventory Project Home Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('http://localhost/InventoryProject/images/squirrel.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-text-white">
+  <div class="w3-display-middle w3-jumbo">
+    <p style= "color: #000000; background-color: #80808080; border: 3px solid #000000;">Welcome!</p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-xlarge">
+    <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-black">login</button></p>
+    <p><button onclick="document.getElementById('register').style.display='block'" class="w3-button w3-black">register</button></p>
+  </div>
+  <div class="w3-display-bottomleft w3-container">
+    <p class="w3-xlarge" style= "color: #FFFFFF; background-color: #80808090; border: 3px solid #000000; text-shadow: 1px 2px 2px #000000;">Project Created by: Brian Davis and I'munique Hill.</p>
+    <p class="w3-large" style= "color: #FFFFFF; background-color: #80808090; border: 3px solid #000000; text-shadow: 1px 2px 2px #000000;">7502 Fondren Rd, Houston, TX 77074</p>
+    <p style= "color: #FFFFFF; background-color: #80808090; border: 3px solid #000000; text-shadow: 1px 2px 2px #000000;">powered by <a href="http://localhost/InventoryProject/HTML/about.html" target="_blank">HBU</a></p>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="login" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <form action="http://localhost/InventoryProject/PHP/authenticate.php" method = "post">
+      <div class="w3-container w3-black w3-display-container">
+        <span onclick="document.getElementById('login').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+        <h1>Username</h1>
+      </div>
+      <div class="w3-container">
+        <h5><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*email" required name="email"></h5>
+      </div>
+      <div class="w3-container w3-black">
+        <h1>Password</h1>
+      </div>
+      <div class="w3-container">
+        <h5><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*password" required name="password"></h5>
+      </div>
+      <div class="w3-container w3-black w3-display-container">
+        <p style="text-align: center;"><button class="w3-button" type="submit" style = "border: 3px solid #ffffff;">Login</button></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div id="register" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('register').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Register</h1>
+    </div>
+    <div class="w3-container">
+      <p>Register for the database here:</p>
+      <form action="http://localhost/InventoryProject/PHP/register.php" method = "post">
+        <p>First Name: <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*Name" required name="fName"></p>
+        <p>Last Name: <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*Name" required name="lName"></p>
+        <p>Username: <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*email" required name="email"></p>
+        <p>Password: <input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*password" required name="password"></p>
+        <p>Verify Password: <input class="w3-input w3-padding-16 w3-border" type="password" placeholder="*password" required name="vPassword"></p>
+        <p>Phone Number: <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="*phone" required name="phone"></p>
+        <p style="text-align: center;"><button class="w3-button" type="submit" style = "border: 3px solid #000000;">register</button></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

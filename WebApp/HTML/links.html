@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Navigation</title>
+    <style>
+      body {
+        background-color: #4baeff;
+      }
+
+      div {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        width: 300px;
+        border: 15px solid rgb(253, 114, 0);
+        padding: 50px;
+        margin: 20px; 
+      }    
+
+      .button {
+        background-color: rgb(253, 114, 0);
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="box1">View all current items that are in the inventory storage.</div>
+      <a href="http://localhost/InventoryProject/PHP/partDisplay.php" class="button">View Items</a>
+    <div id="box2">Add an item to the inventory storage.</div>
+      <a href="http://localhost/InventoryProject/PHP/addPart.php" class="button">Add Items</a>
+    <div id="box3">Modify the attributes of the different items in the inventory storage.</div>
+      <a href="http://localhost/InventoryProject/PHP/partDisplay.php" class="button">Modify Items</a>
+    <div id="box4">Delete an item from the inventory storage.</div>
+      <a href="http://localhost/InventoryProject/PHP/partDisplay.php" class="button">Delete Items</a>
+  </body>
+</html>
