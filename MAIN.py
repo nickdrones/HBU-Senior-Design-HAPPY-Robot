@@ -1,6 +1,7 @@
 import drive_system
 import sensors
 import time
+import statusled
 import signal
 from threading import Thread
 
@@ -50,10 +51,28 @@ print("")
 
 time.sleep(1)
 
+print("Establishing Communication with LED bar to display status")
+HAL = statusled.ledbar()
+print("Connection Established at default I2C address")
+print("")
+
+time.sleep(1)
+
+print("Establishing Communication with Analog to Digital Converter")
+Tyndale = sensors.analog2digital()
+print("Connection Established at default I2C address")
+print("")
+
+HAL.YellowFillTo(5)
+
+time.sleep(1)
+
 print("Establishing Communication with PCA9685 over I2C")
 Hermes = drive_system.Chassis()
 print("Connection with PCA9685 Established at default I2C address")
 print("")
+
+HAL.YellowFillTo(10)
 
 time.sleep(1)
 
@@ -64,6 +83,8 @@ time.sleep(5)
 print("Serial communication established at COM port /dev/ttyACM0")
 print("")
 
+HAL.YellowFillTo(15)
+
 time.sleep(1)
 
 print("Initializing Nvidia Inference Libraries (This may take up to 30 seconds normally, or 15 minutes on a first boot)")
@@ -71,12 +92,16 @@ Sauron = sensors.primaryCamera()
 print("Inference Models successfully loaded to RAM")
 print("")
 
+HAL.YellowFillTo(20)
+
 time.sleep(1)
 
 print("Establishing Communication with magnetometer over I2C")
 Mando = sensors.magnetometer()
 print("Connection with magnetometer Established at default I2C address")
 print("")
+
+HAL.YellowFillTo(24)
 
 time.sleep(1)
 
@@ -92,11 +117,16 @@ print("")
 
 ###################################################################################################
 
+HAL.showSuccessfulInit()
 
-while(1==1):
-    combocoords = Navi.getComboCoords()
-    print(combocoords)
-    time.sleep(2)
+time.sleep(2)
+
+HAL.idleAnimation()
+
+#while(1==1):
+#    combocoords = Navi.getComboCoords()
+#    print(combocoords)
+#    time.sleep(2)
 #    Sauron.processFrame()
 
 
