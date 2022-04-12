@@ -4,7 +4,6 @@ import time
 
 i2c = board.I2C()
 bc24 = Bicolor24(i2c)
-display.brightness = 1
 
 while 1==1:
     for x in range(24):
