@@ -6,11 +6,11 @@ i2c = board.I2C()
 bc24 = Bicolor24(i2c)
 
 while 1==1:
-    for x in range(24):
+    for x in range(22):
         bc24[x] = bc24[0] = bc24.LED_RED
         time.sleep(0.05)
         bc24[x] = bc24.LED_OFF
-    for x in range(24):
+    for x in range(22):
         bc24[24-x] = bc24[0] = bc24.LED_RED
         time.sleep(0.05)
         bc24[24-x] = bc24.LED_OFF
