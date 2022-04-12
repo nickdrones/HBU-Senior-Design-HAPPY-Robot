@@ -1,14 +1,7 @@
 import board
 from adafruit_ht16k33.bargraph import Bicolor24
 import time
-import signal
 
-def keyboardInterruptHandler(signal, frame):
-    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
-    #ALL CODE TO RUN WHILE STOPPING ROBOT GOES HERE
-    bc24.fill(bc24.LED_OFF)
-    exit(0)
-signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 i2c = board.I2C()
 bc24 = Bicolor24(i2c)
