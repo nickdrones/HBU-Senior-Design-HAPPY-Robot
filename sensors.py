@@ -10,6 +10,10 @@ import argparse
 import sys
 import io
 import contextlib
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
 
 class GPS_sensor:
     
@@ -180,7 +184,19 @@ class primaryCamera:
                         person_spotted = True
         if(person_spotted==False):
             print("nobody")
-
+class analog2digital:
+    def __init__(self):
+        self.name = "Tyndale"
+        self.tempVar=0
+        self.i2c = busio.I2C(board.SCL, board.SDA)
+        self.ads = ADS.ADS1115(self.i2c)
+        self.chan = AnalogIn(self.ads, ADS.P0)
+    def getTempVar(self):
+        return self.tempVar
+    def getBatteryVoltage(self):
+        self.rawinputP0 = self.chan.value
+        #MATH HERE TO CONVERT ANALOG VAL TO 0-12V VALUE
+        return self.rawinputP0
 
 
 
