@@ -27,14 +27,14 @@ class ledbar:
         self.bc24.fill(self.bc24.LED_OFF)
     def showSuccessfulDeviceInit(self):
         for x in range(2):
-            self.YellowFillTo(24)
+            self.bc24.fill(self.bc24.LED_YELLOW)
             time.sleep(0.3)
             self.allOff()
     def showSuccessfulRobotInit(self):
         self.allOff()
         time.sleep(1)
         for x in range(4):
-            self.GreenFillTo(24)
+            self.bc24.fill(self.bc24.LED_GREEN)
             time.sleep(0.5)
             self.allOff()
     def KITT(self):
