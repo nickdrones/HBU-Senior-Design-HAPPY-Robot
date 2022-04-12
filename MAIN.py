@@ -52,8 +52,15 @@ print("")
 time.sleep(1)
 
 print("Establishing Communication with LED bar to display status")
-HAL = statusled.ledbar()
-print("Connection Established at default I2C address")
+try:
+    HAL = statusled.ledbar()
+except:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("ERROR!!!")
+    print("LED Bar not connected, continuing...")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+else:
+    print("Connection Established at default I2C address")
 print("")
 
 HAL.showSuccessfulDeviceInit()
@@ -61,8 +68,16 @@ HAL.showSuccessfulDeviceInit()
 time.sleep(1)
 
 print("Establishing Communication with Analog to Digital Converter")
-Tyndale = sensors.analog2digital()
-print("Connection Established at default I2C address")
+try:
+    Tyndale = sensors.analog2digital()
+except:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("ERROR!!!")
+    print("ADC not connected, continuing...")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+else:
+    print("Connection Established at default I2C address")
+
 print("")
 
 HAL.YellowCreepTo(5)
@@ -70,8 +85,15 @@ HAL.YellowCreepTo(5)
 time.sleep(1)
 
 print("Establishing Communication with PCA9685 over I2C")
-Hermes = drive_system.Chassis()
-print("Connection with PCA9685 Established at default I2C address")
+try:
+    Hermes = drive_system.Chassis()
+except:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("ERROR!!!")
+    print("PCA9685 not connected, continuing...")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+else:
+    print("Connection with PCA9685 Established at default I2C address")
 print("")
 
 HAL.YellowCreepTo(10)
@@ -80,9 +102,16 @@ time.sleep(1)
 
 print("Establishing Communication with GPS module over Serial")
 print("Pausing for 5 seconds to allow sensor to connect to satellites")
-#Navi = sensors.GPS_sensor()
-time.sleep(5)
-print("Serial communication established at COM port /dev/ttyACM0")
+try:
+    Navi = sensors.GPS_sensor()
+    time.sleep(5)
+except:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("ERROR!!!")
+    print("GPS Board not connected via serial, continuing...")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+else:
+    print("Serial communication established at COM port /dev/ttyACM0")
 print("")
 
 HAL.YellowCreepTo(15)
@@ -99,8 +128,16 @@ HAL.YellowCreepTo(20)
 time.sleep(1)
 
 print("Establishing Communication with magnetometer over I2C")
-Mando = sensors.magnetometer()
-print("Connection with magnetometer Established at default I2C address")
+try:
+    Mando = sensors.magnetometer()
+    time.sleep(5)
+except:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("ERROR!!!")
+    print("Magnetometer not connected, continuing...")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!")
+else:
+    print("Connection with magnetometer Established at default I2C address")
 print("")
 
 HAL.YellowCreepTo(24)
