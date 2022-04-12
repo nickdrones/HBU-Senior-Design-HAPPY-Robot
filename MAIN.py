@@ -78,7 +78,7 @@ time.sleep(1)
 
 print("Establishing Communication with GPS module over Serial")
 print("Pausing for 5 seconds to allow sensor to connect to satellites")
-Navi = sensors.GPS_sensor()
+#Navi = sensors.GPS_sensor()
 time.sleep(5)
 print("Serial communication established at COM port /dev/ttyACM0")
 print("")
