@@ -36,6 +36,9 @@ I2C devices connected can be listed by address by running the following command:
 Web UI is python utilizing the Anvil framework which can be installed by running the following command:
 > pip3 install anvil-app-server
 
+Analog to Digital converter requires the Adafruit Circuitpython library to run, install via this command:
+> sudo pip3 install adafruit-circuitpython-ads1x15
+
 We are creating the navigation algorithm by storing a list of waypoints and essentially using them as virtual "beacons" that the robot will drive between. The map of paths on campus with waypoints (W##) and destinations (D##) labeled.
 ![The Map](https://raw.githubusercontent.com/nickdrones/HBU-Senior-Design-HAPPY-Robot/main/images/waypointsmap.jpg)
 
