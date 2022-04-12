@@ -11,26 +11,33 @@ class ledbar:
     def getTempVar(self):
         return self.tempVar
     def GreenFillTo(self,amount):
-        for x in range(amount-1):
+        for x in range(amount):
             self.bc24[x]  = self.bc24.LED_GREEN
     def RedFillTo(self,amount):
-        for x in range(amount-1):
-            self.bc24[x]  = self.bc24.LED_GREEN
+        for x in range(amount):
+            self.bc24[x]  = self.bc24.LED_RED
     def YellowFillTo(self,amount):
-        for x in range(amount-1):
-            self.bc24[x]  = self.bc24.LED_GREEN
+        for x in range(amount):
+            self.bc24[x]  = self.bc24.LED_YELLOW
     def YellowCreepTo(self,amount,speed):
-        for x in range(amount-1):
+        for x in range(amount):
             self.bc24[x]  = self.bc24.LED_GREEN
-            time.sleep(0.05)
+            time.sleep(0.07)
     def allOff(self):
         self.bc24.fill(self.bc24.LED_OFF)
-    def showSuccessfulInit(self):
+    def showSuccessfulDeviceInit(self):
+        for x in range(2):
+            self.YellowFillTo(24)
+            time.sleep(0.3)
+            self.allOff()
+    def showSuccessfulRobotInit(self):
+        self.allOff()
+        time.sleep(1)
         for x in range(4):
             self.GreenFillTo(24)
             time.sleep(0.5)
             self.allOff()
-    def idleAnimation(self):
+    def KITT(self):
         while 1==1:
             for x in range(23):
                 self.bc24[x]  = self.bc24.LED_RED

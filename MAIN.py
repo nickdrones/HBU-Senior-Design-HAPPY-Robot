@@ -56,6 +56,8 @@ HAL = statusled.ledbar()
 print("Connection Established at default I2C address")
 print("")
 
+HAL.showSuccessfulDeviceInit()
+
 time.sleep(1)
 
 print("Establishing Communication with Analog to Digital Converter")
@@ -63,7 +65,7 @@ Tyndale = sensors.analog2digital()
 print("Connection Established at default I2C address")
 print("")
 
-HAL.YellowFillTo(5)
+HAL.YellowCreepTo(5)
 
 time.sleep(1)
 
@@ -72,7 +74,7 @@ Hermes = drive_system.Chassis()
 print("Connection with PCA9685 Established at default I2C address")
 print("")
 
-HAL.YellowFillTo(10)
+HAL.YellowCreepTo(10)
 
 time.sleep(1)
 
@@ -83,7 +85,7 @@ time.sleep(5)
 print("Serial communication established at COM port /dev/ttyACM0")
 print("")
 
-HAL.YellowFillTo(15)
+HAL.YellowCreepTo(15)
 
 time.sleep(1)
 
@@ -92,7 +94,7 @@ Sauron = sensors.primaryCamera()
 print("Inference Models successfully loaded to RAM")
 print("")
 
-HAL.YellowFillTo(20)
+HAL.YellowCreepTo(20)
 
 time.sleep(1)
 
@@ -101,7 +103,7 @@ Mando = sensors.magnetometer()
 print("Connection with magnetometer Established at default I2C address")
 print("")
 
-HAL.YellowFillTo(24)
+HAL.YellowCreepTo(24)
 
 time.sleep(1)
 
@@ -117,11 +119,11 @@ print("")
 
 ###################################################################################################
 
-HAL.showSuccessfulInit()
+HAL.showSuccessfulRobotInit()
 
 time.sleep(2)
 
-HAL.idleAnimation()
+HAL.KITT()
 
 #while(1==1):
 #    combocoords = Navi.getComboCoords()
