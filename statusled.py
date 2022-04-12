@@ -19,7 +19,7 @@ class ledbar:
     def YellowFillTo(self,amount):
         for x in range(amount):
             self.bc24[x]  = self.bc24.LED_YELLOW
-    def YellowCreepTo(self,amount,speed):
+    def YellowCreepTo(self,amount):
         for x in range(amount):
             self.bc24[x]  = self.bc24.LED_GREEN
             time.sleep(0.07)
