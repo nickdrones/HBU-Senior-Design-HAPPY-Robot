@@ -1,3 +1,7 @@
+#######################################################
+## Run this code using following command:
+##     flask run --host=172.17.21.145
+#######################################################
 import random
 import re
 import sys
