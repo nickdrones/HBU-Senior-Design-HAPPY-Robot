@@ -19,9 +19,44 @@
         margin-bottom: 10px;
         padding: 10px;
       }
-      .magnet th, .magnet td {
-        padding: 6px;
-        text-align: center;
+      .card {
+        float: right;
+        width: 200px;
+        border: 1px solid black;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        color: white;
+        padding: 10px;
+        position: relative;
+      }
+      .card .zmdi {
+        color: white;
+        font-size: 28px;
+        opacity: 0.3;
+        position: absolute;
+        right: 13px;
+        top: 13px;
+      }
+      .card .stat {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        font-size: 8px;
+        margin-top: 25px;
+        padding: 10px 10px 0;
+        text-transform: uppercase;
+      }
+      .card .title {
+        display: inline-block;
+        font-size: 8px;
+        padding: 10px 10px 0;
+        text-transform: uppercase;
+      }
+      .card .value {
+        font-size: 28px;
+        padding: 0 10px;
+      }
+      .card.blue {
+        background-color: #2298F1;
       }
     </style>
     {{ turbo() }}
