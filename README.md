@@ -33,8 +33,8 @@ You cannot simply run the code as root because the i2ctools Python library is no
 I2C devices connected can be listed by address by running the following command:
 > i2cdetect -y -r 1
 
-Web UI is python utilizing the Anvil framework which can be installed by running the following command:
-> pip3 install anvil-app-server
+Web UI is python utilizing the Flask framework and turbo flask plugin, both of which can be installed by running the following command:
+> pip3 install flask turbo-flask
 
 Analog to Digital converter requires the Adafruit Circuitpython library to run, install via this command:
 > sudo pip3 install adafruit-circuitpython-ads1x15
