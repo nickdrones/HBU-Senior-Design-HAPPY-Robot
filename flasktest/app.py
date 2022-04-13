@@ -26,13 +26,13 @@ def index():
 @app.context_processor
 def inject_heading():
     headingtoreturn = int(random.random() * 100) / 100
-    gpsToReturn = str(random.random() * 1000) + "," + str(random.random() * 1000)
+    gpsToReturn = str(int(random.random() * 10000)) + "," + str(int(random.random() * 10000))
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn}
 
 
 def update_load():
     with app.app_context():
         while True:
-            time.sleep(0.1)
+            time.sleep(0.2)
             turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
