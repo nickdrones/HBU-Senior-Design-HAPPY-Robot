@@ -3,7 +3,7 @@
   <head>
     <title>Turbo-Flask Streams Demo</title>
     <style>
-      .load {
+      .magnet {
         float: right;
         width: 300px;
         border: 1px solid black;
@@ -11,7 +11,7 @@
         margin-bottom: 10px;
         padding: 10px;
       }
-      .load th, .load td {
+      .magnet th, .magnet td {
         padding: 6px;
         text-align: center;
       }
@@ -19,7 +19,7 @@
     {{ turbo() }}
   </head> 
   <body>
-    {% include "loadavg.html" %}
+    {% include "magnet.html" %}
     {% block content %}{% endblock %}
   </body>
 </html>

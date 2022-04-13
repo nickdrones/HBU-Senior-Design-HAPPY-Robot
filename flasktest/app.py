@@ -33,10 +33,10 @@ def inject_load():
             load = f.read().split()[0:3]
     else:
         load = [int(random.random() * 100) / 100 for _ in range(3)]
-    return {'load1': load[0], 'load5': load[1], 'load15': load[2]}
+    return {'heading1': load[0]}
 
 def update_load():
     with app.app_context():
         while True:
             time.sleep(0.5)
-            turbo.push(turbo.replace(render_template('loadavg.html'), 'load'))
+            turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
