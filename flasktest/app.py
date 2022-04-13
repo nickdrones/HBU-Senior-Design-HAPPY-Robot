@@ -28,7 +28,7 @@ def page2():
 
 @app.context_processor
 def inject_load():
-    if sys.platform.startswith('linux'): 
+    if sys.platform.startswith('notlinux'): 
         with open('/proc/loadavg', 'rt') as f:
             load = f.read().split()[0:3]
     else:
@@ -38,5 +38,5 @@ def inject_load():
 def update_load():
     with app.app_context():
         while True:
-            time.sleep(1)
+            time.sleep(0.5)
             turbo.push(turbo.replace(render_template('loadavg.html'), 'load'))
