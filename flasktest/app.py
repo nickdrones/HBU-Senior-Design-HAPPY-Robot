@@ -28,7 +28,9 @@ def inject_data():
     headingtoreturn = int(random.random() * 360)
     gpsToReturn = str(int(random.random() * -100000000)) + " , " + str(int(random.random() * 100000000))
     voltagetoreturn = int(random.random() * 120)/10
-    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn}
+    currentjobstatus = "Idle"
+    timesincelastservercontact = 3
+    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact}
 
 
 def update_load():
@@ -37,3 +39,5 @@ def update_load():
             time.sleep(0.2)
             turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
+            turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
+            turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
