@@ -10,6 +10,13 @@
         margin-bottom: 10px;
         padding: 10px;
       }
+      .gps {
+        float: right;
+        border: 1px solid black;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
       .magnet th, .magnet td {
         padding: 6px;
         text-align: center;
@@ -19,6 +26,7 @@
   </head> 
   <body>
     {% include "magnet.html" %}
+    {% include "gps.html" %}
     {% block content %}{% endblock %}
   </body>
 </html>
