@@ -26,7 +26,7 @@ def index():
 @app.context_processor
 def inject_data():
     headingtoreturn = int(random.random() * 100) / 100
-    gpsToReturn = str(int(random.random() * 10000)) + "," + str(int(random.random() * 10000))
+    gpsToReturn = str(int(random.random() * -100000000)) + "," + str(int(random.random() * 100000000))
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn}
 
 
