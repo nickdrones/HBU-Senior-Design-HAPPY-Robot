@@ -22,9 +22,6 @@ def before_first_request():
 def index():
     return render_template('index.html')
 
-@app.route('/page2')
-def page2():
-    return render_template('page2.html')
 
 @app.context_processor
 def inject_load():
