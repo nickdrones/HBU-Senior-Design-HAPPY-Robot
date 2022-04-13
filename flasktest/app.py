@@ -27,7 +27,8 @@ def index():
 def inject_data():
     headingtoreturn = int(random.random() * 360)
     gpsToReturn = str(int(random.random() * -100000000)) + " , " + str(int(random.random() * 100000000))
-    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn}
+    voltagetoreturn = int(random.random() * 120)/10
+    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn}
 
 
 def update_load():
