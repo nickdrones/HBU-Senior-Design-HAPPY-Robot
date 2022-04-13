@@ -30,7 +30,10 @@ def inject_data():
     voltagetoreturn = int(random.random() * 120)/10
     currentjobstatus = "Idle"
     timesincelastservercontact = 3
-    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact}
+    nearestdestinationtome = "Atwood II"
+    distancetonearestdestinationtome = 32
+    return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact,'returnednearestdestination':nearestdestinationtome,'distancetonearestdestination':distancetonearestdestinationtome}
+
 
 
 def update_load():
@@ -41,3 +44,4 @@ def update_load():
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
+            turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))

@@ -73,6 +73,9 @@
       .card.red {
         background-color: #D65B4A;
       }
+      .card.purple {
+        background-color: #6a0dad ;
+      }
     </style>
     {{ turbo() }}
   </head> 
@@ -81,6 +84,7 @@
     {% include "gps.html" %}
     {% include "voltagesensor.html" %}
     {% include "onthejob.html" %}
+    {% include "nearestdestination.html" %}
     {% block content %}{% endblock %}
   </body>
 </html>
