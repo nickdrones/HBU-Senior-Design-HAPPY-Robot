@@ -24,13 +24,9 @@ def index():
 
 
 @app.context_processor
-def inject_load():
-    if sys.platform.startswith('notlinux'): 
-        with open('/proc/loadavg', 'rt') as f:
-            load = f.read().split()[0:3]
-    else:
-        load = [int(random.random() * 100) / 100 for _ in range(3)]
-    return {'heading1': load[0]}
+def inject_heading():
+    headingtoreturn = [int(random.random() * 100) / 100]
+    return {'returnedHeading': headingtoreturn}
 
 def update_load():
     with app.app_context():
