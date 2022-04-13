@@ -45,3 +45,7 @@ def update_load():
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
+
+if __name__ == "__main__":
+    app.run(debug=True, port=8080)
+    #app.run(debug=True, port=8080, host="172.17.21.145")
