@@ -16,7 +16,8 @@ app = Flask(__name__)
 turbo = Turbo(app)
 
 authorizedUsers = ["nickb","briand","luisc","drakel"]
-userPasswords = ["5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
+userPasswords = ["9b76b43fd46e3d22c67339ad42537bb1","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
+#all accounts except mine use password "password"
 
 @app.before_first_request
 def before_first_request():
