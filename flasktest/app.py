@@ -10,10 +10,13 @@ from turbo_flask import Turbo
 import threading
 import time
 from functools import wraps
+import hashlib
 
 app = Flask(__name__)
 turbo = Turbo(app)
 
+authorizedUsers = ["nickb","briand","luisc","drakel"]
+userPasswords = ["5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
 
 @app.before_first_request
 def before_first_request():
@@ -41,8 +44,16 @@ def index():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+        indexofuser=-1
+        for x in range(len(authorizedUsers)):
+            if str(request.form['username']) == authorizedUsers[x]:
+                indexofuser = x
+        tempHashVal = hashlib.md5(request.form['password'].encode())
+        hashedEnteredPassword = tempHashVal.hexdigest()
+        if indexofuser < 0:
+            error = 'Invalid Username. Please try again.'
+        elif hashedEnteredPassword != userPasswords[x]:
+            error = 'Invalid Password. Please try again.'
         else:
             session['logged_in'] = True
             flash('You were logged in.')
