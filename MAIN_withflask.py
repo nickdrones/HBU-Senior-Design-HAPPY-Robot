@@ -182,8 +182,8 @@ app = Flask(__name__)
 turbo = Turbo(app)
 
 authorizedUsers = ["nickb","briand","luisc","drakel"]
-userPasswords = ["9b76b43fd46e3d22c67339ad42537bb1","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
-#all accounts except mine use password "password"
+userPasswords = ["5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
+#all accounts use password "password"
 
 @app.before_first_request
 def before_first_request():
@@ -239,10 +239,12 @@ def inject_data():
     headingtoreturn = Mando.getHeading()
     gpsToReturn = str(Navi.getLastLongitude()) + " , " + str(Navi.getLastLattitude())
     voltagetoreturn = Tyndale.getBatteryVoltage()
-    currentjobstatus = "Idle"
+    jobStatusAvail = ["Idle", "On Job", "Error", "Waiting for Dropoff", "Waiting for Pickup", "Loading", "Unloading"]
+    currentjobstatus = jobStatusAvail[0]
     timesincelastservercontact = 3
-    nearestdestinationtome = "Atwood II"
-    distancetonearestdestinationtome = 32
+    possibleDestinations = ["Atwood II", "Atwood I", "MDA", "Sports Media Office","Sports Marketing","Glasscock/Maybee","Science Office", "COSE Office", "Library", "Nursing Office","Hodo","Hinton"]
+    nearestdestinationtome = possibleDestinations[0]
+    distancetonearestdestinationtome = 999
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact,'returnednearestdestination':nearestdestinationtome,'distancetonearestdestination':distancetonearestdestinationtome}
 
 
@@ -250,7 +252,7 @@ def inject_data():
 def update_load():
     with app.app_context():
         while True:
-            time.sleep(1)
+            time.sleep(0.5)
             turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
