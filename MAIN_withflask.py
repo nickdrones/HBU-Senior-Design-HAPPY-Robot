@@ -236,9 +236,9 @@ def logout():
 
 @app.context_processor
 def inject_data():
-    headingtoreturn = int(random.random() * 360)
-    gpsToReturn = str(int(random.random() * -100000000)) + " , " + str(int(random.random() * 100000000))
-    voltagetoreturn = int(random.random() * 120)/10
+    headingtoreturn = Mando.getHeading()
+    gpsToReturn = str(Navi.getLastLongitude()) + " , " + str(Navi.getLastLattitude())
+    voltagetoreturn = Tyndale.getBatteryVoltage()
     currentjobstatus = "Idle"
     timesincelastservercontact = 3
     nearestdestinationtome = "Atwood II"
@@ -250,7 +250,7 @@ def inject_data():
 def update_load():
     with app.app_context():
         while True:
-            time.sleep(0.2)
+            time.sleep(1)
             turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
