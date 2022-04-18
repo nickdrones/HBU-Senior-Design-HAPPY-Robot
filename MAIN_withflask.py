@@ -252,7 +252,7 @@ def inject_data():
 def update_load():
     with app.app_context():
         while True:
-            time.sleep(0.5)
+            time.sleep(1)
             turbo.push(turbo.replace(render_template('magnet.html'), 'magnet'))
             turbo.push(turbo.replace(render_template('gps.html'), 'gps'))
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
