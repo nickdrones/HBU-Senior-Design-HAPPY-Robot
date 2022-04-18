@@ -195,7 +195,7 @@ class analog2digital:
         return self.tempVar
     def getBatteryVoltage(self):
         self.rawinputP0 = self.chan.value
-        self.voltageToReturn = ((50 * self.rawinputP0) + 617)/80205
+        self.voltageToReturn = round(((50 * self.rawinputP0) + 617)/80205, 2)
         # y = 1604.1X - 12.34
         # x = (50y + 617)/80205
         #MATH HERE TO CONVERT ANALOG VAL TO 0-12V VALUE
