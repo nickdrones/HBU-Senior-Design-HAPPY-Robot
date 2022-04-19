@@ -5,12 +5,16 @@
 import random
 import re
 import sys
-from flask import Flask, render_template, redirect, url_for, request, session, flash
+from flask import Flask, render_template, redirect, url_for, request, session, flash, Response
 from turbo_flask import Turbo
 import threading
 import time
 from functools import wraps
 import hashlib
+import cv2
+
+app = Flask(__name__)
+video = cv2.VideoCapture(0)
 
 app = Flask(__name__)
 turbo = Turbo(app)
@@ -40,6 +44,10 @@ def login_required(f):
 @login_required
 def index():
     return render_template('index.html')
+
+@app.route('/maptest')
+def maptest():
+    return render_template('maptest.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -100,6 +108,26 @@ def update_load():
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
+
+def gen(video):
+    while True:
+        success, image = video.read()
+        frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        frame_gray = cv2.equalizeHist(frame_gray)
+
+        ret, jpeg = cv2.imencode('.jpg', image)
+
+        frame = jpeg.tobytes()
+        
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    global video
+    return Response(gen(video),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

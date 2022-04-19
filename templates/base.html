@@ -4,6 +4,12 @@
     <title>H.A.P.P.Y Robot Status Page</title>
     <link rel="shortcut icon" type="image/ico" href="{{url_for('static', filename='favicon.ico')}}"/>
     <style>
+      iframe {
+        height: 375px;
+        width: 500px;
+        resize: both;
+        overflow: auto;
+      }
       body {
         background-color: #1b2431;
         color: #ffffff;
@@ -92,11 +98,6 @@
       } 
     </style>
     {{ turbo() }}
-    <script> 
-      $(function(){
-        $("#includedContent").load("/video_feed"); 
-      });
-      </script> 
   </head> 
   <body>
     {% include "magnet.html" %}
