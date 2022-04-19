@@ -95,16 +95,16 @@ while True:
 			break
 		if data == ctrl_cmd[0]:
 			print('motor moving forward')
-			driveChassisLR(50,50)
+			driveChassisLR(100,100)
 		elif data == ctrl_cmd[1]:
 			print('recv backward cmd')
-			driveChassisLR(-50,-50)
+			driveChassisLR(-100,-100)
 		elif data == ctrl_cmd[2]:
 			print('recv left cmd')
-			driveChassisLR(-50,50)
+			driveChassisLR(-100,100)
 		elif data == ctrl_cmd[3]:
 			print('recv right cmd')
-			driveChassisLR(50,-50)
+			driveChassisLR(100,-100)
 		elif data == ctrl_cmd[4]:
 			print('recv stop cmd')
 			stopAllMotors()
