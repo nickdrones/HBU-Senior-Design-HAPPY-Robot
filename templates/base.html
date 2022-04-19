@@ -92,6 +92,11 @@
       } 
     </style>
     {{ turbo() }}
+    <script> 
+      $(function(){
+        $("#includedContent").load("/video_feed"); 
+      });
+      </script> 
   </head> 
   <body>
     {% include "magnet.html" %}
