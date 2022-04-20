@@ -238,6 +238,15 @@ def logout():
     flash('You were logged out.')
     return redirect(url_for('login'))
 
+@app.route('/api/jobreceive', methods=['POST'])
+def process_json():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.json
+        print(json)
+    else:
+        return 'Content-Type not supported!'
+
 @app.context_processor
 def inject_data():
     fieldnames = ['destinationCode', 'normalName','destcoords1','destcoords2']
