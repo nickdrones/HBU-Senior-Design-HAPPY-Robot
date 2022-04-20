@@ -44,9 +44,9 @@ def gen():
         #frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         #frame_gray = cv2.equalizeHist(frame_gray)
 
-        ret, jpeg = cv2.imencode('.jpg', image)
+        #ret, jpeg = cv2.imencode('.jpg', image)
 
-        frame = jpeg.tobytes()
+        frame = image.tobytes()
         
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
