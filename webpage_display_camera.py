@@ -37,7 +37,7 @@ def index():
     return "Default Message"
 
 
-def gen(video):
+def gen():
     while True:
         #success, image = video.read()
         image = input.Capture()
@@ -54,7 +54,7 @@ def gen(video):
 @app.route('/video_feed')
 def video_feed():
     global video
-    return Response(gen(video),
+    return Response(gen(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
