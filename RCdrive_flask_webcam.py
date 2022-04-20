@@ -14,6 +14,8 @@ import time
 from functools import wraps
 import hashlib
 from socket import *
+import _thread
+
 
 
 
@@ -260,53 +262,54 @@ def update_load():
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
 
-#if __name__ == "__main__":
-app.run(debug=False, port=8080, host="172.17.21.145")
 
-ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
+def allRCcode():
+    ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
 
-HOST = ''           # The variable of HOST is null, so the function bind( ) can be bound to all valid addresses.
-PORT = 21567
-BUFSIZ = 1024       # Size of the buffer
-ADDR = (HOST, PORT)
+    HOST = ''           # The variable of HOST is null, so the function bind( ) can be bound to all valid addresses.
+    PORT = 21567
+    BUFSIZ = 1024       # Size of the buffer
+    ADDR = (HOST, PORT)
 
-tcpSerSock = socket(AF_INET, SOCK_STREAM)    # Create a socket.
-tcpSerSock.bind(ADDR)    # Bind the IP address and port number of the server. 
-tcpSerSock.listen(5)     # The parameter of listen() defines the number of connections permitted at one time. Once the 
-			 # connections are full, others will be rejected. 
+    tcpSerSock = socket(AF_INET, SOCK_STREAM)    # Create a socket.
+    tcpSerSock.bind(ADDR)    # Bind the IP address and port number of the server. 
+    tcpSerSock.listen(5)     # The parameter of listen() defines the number of connections permitted at one time. Once the 
+                # connections are full, others will be rejected. 
 
-while True:
-	Hermes.stopAllMotors()
-	print('Waiting for connection...')
-	# Waiting for connection. Once receiving a connection, the function accept() returns a separate 
-	# client socket for the subsequent communication. By default, the function accept() is a blocking 
-	# one, which means it is suspended before the connection comes.
-	tcpCliSock, addr = tcpSerSock.accept() 
-	print('...connected from :', addr)     # Print the IP address of the client connected with the server.
+    while True:
+        Hermes.stopAllMotors()
+        print('Waiting for connection...')
+        # Waiting for connection. Once receiving a connection, the function accept() returns a separate 
+        # client socket for the subsequent communication. By default, the function accept() is a blocking 
+        # one, which means it is suspended before the connection comes.
+        tcpCliSock, addr = tcpSerSock.accept() 
+        print('...connected from :', addr)     # Print the IP address of the client connected with the server.
 
-	while True:
-		data = ''
-		data = tcpCliSock.recv(BUFSIZ).decode()    # Receive data sent from the client. 
-		if not data:
-			break
-		if data == ctrl_cmd[0]:
-			print('motor moving forward')
-			Hermes.driveChassisLR(100,100)
-		elif data == ctrl_cmd[1]:
-			print('recv backward cmd')
-			Hermes.driveChassisLR(-100,-100)
-		elif data == ctrl_cmd[2]:
-			print('recv left cmd')
-			Hermes.driveChassisLR(-100,100)
-		elif data == ctrl_cmd[3]:
-			print('recv right cmd')
-			Hermes.driveChassisLR(100,-100)
-		elif data == ctrl_cmd[4]:
-			print('recv stop cmd')
-			Hermes.stopAllMotors()
-		else:
-			print('Command Error! Cannot recognize command: ' + str(data))
-
-
+        while True:
+            data = ''
+            data = tcpCliSock.recv(BUFSIZ).decode()    # Receive data sent from the client. 
+            if not data:
+                break
+            if data == ctrl_cmd[0]:
+                print('motor moving forward')
+                Hermes.driveChassisLR(100,100)
+            elif data == ctrl_cmd[1]:
+                print('recv backward cmd')
+                Hermes.driveChassisLR(-100,-100)
+            elif data == ctrl_cmd[2]:
+                print('recv left cmd')
+                Hermes.driveChassisLR(-100,100)
+            elif data == ctrl_cmd[3]:
+                print('recv right cmd')
+                Hermes.driveChassisLR(100,-100)
+            elif data == ctrl_cmd[4]:
+                print('recv stop cmd')
+                Hermes.stopAllMotors()
+            else:
+                print('Command Error! Cannot recognize command: ' + str(data))
+if __name__ == "__main__":
+    _thread.start_new_thread(app.run(debug=False, port=8080, host="172.17.21.145"))
+    _thread.start_new_thread(allRCcode())
+    
 
 #quit()
