@@ -1,5 +1,8 @@
 from flask import Flask, Response
 import cv2
+from PIL import Image
+import base64
+from io import BytesIO
 
 app = Flask(__name__)
 
@@ -45,8 +48,17 @@ def gen():
         #frame_gray = cv2.equalizeHist(frame_gray)
 
         #ret, jpeg = cv2.imencode('.jpg', image)
+        image_array = jetson.utils.cudaToNumpy(image)
 
-        frame = image.tobytes()
+        pil_image = Image.fromarray(image_array, 'RGB')
+
+        buffered = BytesIO()
+
+        pil_image.save(buffered, format="JPEG")
+
+        frame = base64.b64encode(buffered.getvalue())
+
+        #frame = jpeg.tobytes()
         
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
