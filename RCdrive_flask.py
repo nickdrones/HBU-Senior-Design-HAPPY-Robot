@@ -17,6 +17,8 @@ from socket import *
 import pandas as pd
 import math 
 
+start_time = time.time()
+
 
 
 ############################################################
@@ -271,7 +273,8 @@ def inject_data():
     voltagetoreturn = Tyndale.getBatteryVoltage()
     jobStatusAvail = ["Idle", "On Job", "Error", "Waiting for Dropoff", "Waiting for Pickup", "Loading", "Unloading"]
     currentjobstatus = jobStatusAvail[0]
-    timesincelastservercontact = 3
+    start_time = time.time()
+    timesincelastservercontact = int(int(time.time()-start_time)/60)
     nearestdestinationtome = A.values[lengths.index(lengthsToSort[0])][int(fieldnames.index("normalName"))]
     distancetonearestdestinationtome = int(lengthsToSort[0])
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact,'returnednearestdestination':nearestdestinationtome,'distancetonearestdestination':distancetonearestdestinationtome}
