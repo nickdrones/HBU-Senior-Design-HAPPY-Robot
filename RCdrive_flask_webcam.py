@@ -242,8 +242,8 @@ def logout():
 def inject_data():
     fieldnames = ['destinationCode', 'normalName','destcoords1','destcoords2']
     #coords to test
-    coords1 = Navi.getLastLattitude()
-    coords2 = Navi.getLastLongitude()
+    coords1 = int(Navi.getLastLattitude())
+    coords2 = int(Navi.getLastLongitude())
     coord1vals = []
     coord2vals = []
     lengths = []
