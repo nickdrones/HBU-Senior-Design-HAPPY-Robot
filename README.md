@@ -42,13 +42,16 @@ Analog to Digital converter requires the Adafruit Circuitpython library to run, 
 LED Status bar needs an adafruit library, install via this command:
 > pip3 install adafruit-circuitpython-ht16k33
 
+Currently, the web UI and RC code will not run in the same code, so you can run them seperately by using the following commands:
+> python3 serverforRC-w-driving.py &
+> python3 RCdrive_flask_webcam.py
+...and you can kill all python processes with the following command:
+> sudo pkill python
+
 We are creating the navigation algorithm by storing a list of waypoints and essentially using them as virtual "beacons" that the robot will drive between. The map of paths on campus with waypoints (W##) and destinations (D##) labeled.
 ![The Map](https://raw.githubusercontent.com/nickdrones/HBU-Senior-Design-HAPPY-Robot/main/images/waypointsmap.jpg)
 
 ## Coming Soon
 
 - Navigation Algorithm
-- Voltage sensor with ADC
-- Web UI for sensor monitoring
-- Different Accounts for security
 - And more!
