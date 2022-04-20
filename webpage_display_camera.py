@@ -48,15 +48,15 @@ def gen():
         #frame_gray = cv2.equalizeHist(frame_gray)
 
         #ret, jpeg = cv2.imencode('.jpg', image)
-        image_array = jetson.utils.cudaToNumpy(image)
+        #image_array = jetson.utils.cudaToNumpy(image)
 
-        pil_image = Image.fromarray(image_array, 'RGB')
+        #pil_image = Image.fromarray(image_array, 'RGB')
 
-        buffered = BytesIO()
+        #buffered = BytesIO()
 
-        pil_image.save(buffered, format="JPEG")
+        #pil_image.save(buffered, format="JPEG")
 
-        frame = base64.b64encode(buffered.getvalue())
+        #frame = base64.b64encode(buffered.getvalue())
 
         #frame = jpeg.tobytes()
         
