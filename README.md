@@ -44,7 +44,7 @@ LED Status bar needs an adafruit library, install via this command:
 
 Currently, the web UI and RC code will not run in the same code, so you can run them seperately by using the following commands:
 > python3 serverforRC-w-driving.py &
-> python3 RCdrive_flask_webcam.py
+> python3 RCdrive_flask.py
 ...and you can kill all python processes with the following command:
 > sudo pkill python
 
