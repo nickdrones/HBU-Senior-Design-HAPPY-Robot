@@ -43,7 +43,7 @@ def index():
 def gen():
     while True:
         #success, image = video.read()
-        image = input.Capture()
+        frame = input.Capture(format='rgb8')
         #frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         #frame_gray = cv2.equalizeHist(frame_gray)
 
