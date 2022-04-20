@@ -13,7 +13,6 @@ import threading
 import time
 from functools import wraps
 import hashlib
-import cv2
 from socket import *
 
 
@@ -131,7 +130,6 @@ HAL.YellowCreepTo(15)
 time.sleep(1)
 
 print("Initializing Camera")
-video = cv2.VideoCapture(0)
 print("Camera Loaded Successfully")
 print("")
 
@@ -261,26 +259,6 @@ def update_load():
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
-
-def gen(video):
-    while True:
-        success, image = video.read()
-        frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        frame_gray = cv2.equalizeHist(frame_gray)
-
-        ret, jpeg = cv2.imencode('.jpg', image)
-
-        frame = jpeg.tobytes()
-        
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
-@app.route('/video_feed')
-def video_feed():
-    global video
-    return Response(gen(video),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
 
 if __name__ == "__main__":
     app.run(debug=False, port=8080, host="172.17.21.145")

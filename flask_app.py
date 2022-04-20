@@ -13,7 +13,6 @@ from functools import wraps
 import hashlib
 import cv2
 
-app = Flask(__name__)
 video = cv2.VideoCapture(0)
 
 app = Flask(__name__)
@@ -131,4 +130,5 @@ def video_feed():
 
 if __name__ == "__main__":
     #app.run(debug=True, port=8080)
-    app.run(debug=True, port=8080, host="172.17.21.145")
+    app.run(debug=True, port=8080, host="0.0.0.0")
+    #app.run(debug=True, port=8080, host="172.17.21.145")
