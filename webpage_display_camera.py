@@ -3,6 +3,7 @@ import cv2
 from PIL import Image
 import base64
 from io import BytesIO
+import time
 
 app = Flask(__name__)
 
@@ -43,7 +44,8 @@ def index():
 def gen():
     while True:
         #success, image = video.read()
-        frame = input.Capture(format='rgb8')
+        time.sleep(1)
+        frame = input.Capture(format='rgb32f')
         #frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         #frame_gray = cv2.equalizeHist(frame_gray)
 
@@ -59,7 +61,6 @@ def gen():
         #frame = base64.b64encode(buffered.getvalue())
 
         #frame = jpeg.tobytes()
-        
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
