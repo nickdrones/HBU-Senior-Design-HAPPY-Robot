@@ -260,8 +260,8 @@ def update_load():
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
 
-if __name__ == "__main__":
-    app.run(debug=False, port=8080, host="172.17.21.145")
+#if __name__ == "__main__":
+app.run(debug=False, port=8080, host="172.17.21.145")
 
 ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
 
