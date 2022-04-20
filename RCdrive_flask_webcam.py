@@ -264,7 +264,7 @@ def inject_data():
     currentjobstatus = jobStatusAvail[0]
     timesincelastservercontact = 3
     nearestdestinationtome = A.values[lengths.index(lengthsToSort[0])][int(fieldnames.index("normalName"))]
-    distancetonearestdestinationtome = 999
+    distancetonearestdestinationtome = int(lengthsToSort[0])
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact,'returnednearestdestination':nearestdestinationtome,'distancetonearestdestination':distancetonearestdestinationtome}
 
 
