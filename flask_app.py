@@ -13,7 +13,8 @@ from functools import wraps
 import hashlib
 import cv2
 
-video = cv2.VideoCapture(0)
+#video = cv2.VideoCapture(0)
+video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
 
 app = Flask(__name__)
 turbo = Turbo(app)
