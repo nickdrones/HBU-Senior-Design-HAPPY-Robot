@@ -21,13 +21,13 @@ def keyboardInterruptHandler(signal, frame):
 signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 #video = cv2.VideoCapture(0)
-video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
+video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, width=(int)1280, height=(int)720 format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
 
 app = Flask(__name__)
 turbo = Turbo(app)
 
 authorizedUsers = ["nickb","briand","luisc","drakel"]
-userPasswords = ["9b76b43fd46e3d22c67339ad42537bb1","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
+userPasswords = ["5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
 #all accounts except mine use password "password"
 
 @app.before_first_request
@@ -119,10 +119,16 @@ def update_load():
 def gen(video):
     while True:
         success, image = video.read()
+        scale_percent = 50 # percent of original size
+        width = int(image.shape[1] * scale_percent / 100)
+        height = int(image.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        # resize image
+        resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
         frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         frame_gray = cv2.equalizeHist(frame_gray)
 
-        ret, jpeg = cv2.imencode('.jpg', image)
+        ret, jpeg = cv2.imencode('.jpg', resized)
 
         frame = jpeg.tobytes()
         
