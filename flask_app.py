@@ -12,6 +12,13 @@ import time
 from functools import wraps
 import hashlib
 import cv2
+import signal
+
+def keyboardInterruptHandler(signal, frame):
+    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
+    #ALL CODE TO RUN WHILE STOPPING ROBOT GOES HERE
+    exit(0)
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 #video = cv2.VideoCapture(0)
 video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
