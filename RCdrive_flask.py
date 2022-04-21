@@ -16,6 +16,8 @@ import hashlib
 from socket import *
 import pandas as pd
 import math 
+import cv2
+import signal
 
 start_time = time.time()
 
@@ -29,6 +31,9 @@ def keyboardInterruptHandler(signal, frame):
     #ALL CODE TO RUN WHILE STOPPING ROBOT GOES HERE
     exit(0)
 signal.signal(signal.SIGINT, keyboardInterruptHandler)
+
+#video = cv2.VideoCapture(0)
+video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, width=(int)1280, height=(int)720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
 
 
 
@@ -290,6 +295,32 @@ def update_load():
             turbo.push(turbo.replace(render_template('voltagesensor.html'), 'voltage'))
             turbo.push(turbo.replace(render_template('onthejob.html'), 'onthejob'))
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
+
+def gen(video):
+    while True:
+        success, image = video.read()
+        scale_percent = 30 # percent of original size
+        width = int(image.shape[1] * scale_percent / 100)
+        height = int(image.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        # resize image
+        resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+        frame_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        frame_gray = cv2.equalizeHist(frame_gray)
+
+        ret, jpeg = cv2.imencode('.jpg', resized)
+
+        frame = jpeg.tobytes()
+        
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    global video
+    return Response(gen(video),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 #if __name__ == "__main__":
 A = pd.read_csv('destinations.csv')
