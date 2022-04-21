@@ -18,6 +18,8 @@ import pandas as pd
 import math 
 import cv2
 import signal
+import _thread
+
 
 start_time = time.time()
 
@@ -31,9 +33,6 @@ def keyboardInterruptHandler(signal, frame):
     #ALL CODE TO RUN WHILE STOPPING ROBOT GOES HERE
     exit(0)
 signal.signal(signal.SIGINT, keyboardInterruptHandler)
-
-#video = cv2.VideoCapture(0)
-video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, width=(int)1280, height=(int)720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
 
 
 
@@ -139,6 +138,7 @@ HAL.YellowCreepTo(15)
 time.sleep(1)
 
 print("Initializing Camera")
+video =  cv2.VideoCapture("nvarguscamerasrc ! nvvidconv ! video/x-raw, width=(int)1280, height=(int)720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink", cv2.CAP_GSTREAMER)
 print("Camera Loaded Successfully")
 print("")
 
@@ -324,6 +324,7 @@ def video_feed():
 
 #if __name__ == "__main__":
 A = pd.read_csv('destinations.csv')
+_thread.start_new_thread(HAL.KITT)
 app.run(debug=False, port=8080, host="172.17.21.145")
 
 
