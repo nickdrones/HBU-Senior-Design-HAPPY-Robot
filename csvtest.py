@@ -1,12 +1,12 @@
 import pandas as pd
 import math 
 
-A = pd.read_csv('destinations.csv')
+A = pd.read_csv('destinations.csv', header=None)
 fieldnames = ['destinationCode', 'normalName','destcoords1','destcoords2']
 
 #coords to test
-coords1 = -955168943
-coords2 = 296945742
+coords1 = -955145765
+coords2 = 296942771
 
 coord1vals = []
 coord2vals = []

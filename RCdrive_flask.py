@@ -18,7 +18,6 @@ import pandas as pd
 import math 
 import cv2
 import signal
-import _thread
 
 
 start_time = time.time()
@@ -323,8 +322,7 @@ def video_feed():
 
 
 #if __name__ == "__main__":
-A = pd.read_csv('destinations.csv')
-_thread.start_new_thread(HAL.KITT)
+A = pd.read_csv('destinations.csv',header=None)
 app.run(debug=False, port=8080, host="172.17.21.145")
 
 
