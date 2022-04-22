@@ -36,6 +36,8 @@ I2C devices connected can be listed by address by running the following command:
 Web UI is python utilizing the Flask framework and turbo flask plugin, both of which can be installed by running the following command:
 > pip3 install flask turbo-flask
 
+Camera streaming to web UI is performed using opencv. However, the OpenCV version available for download for python does not work, and you must compile from source (takes about 8 hours on the Jetson Nano) using the bash script included in the repository (deprecated folder)
+
 Analog to Digital converter requires the Adafruit Circuitpython library to run, install via this command:
 > sudo pip3 install adafruit-circuitpython-ads1x15
 
