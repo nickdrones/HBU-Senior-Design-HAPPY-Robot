@@ -21,11 +21,8 @@ class Chassis:
     def getRightSpeed(self):
         return self.rightSpeed
 
-    def sing(self, song):
-        return " {} sings {}".format(self.name, song)
-
-    def dance(self):
-        return "{} is now dancing".format(self.name)
+    def spirit_chant(self):
+        return "{} says: DAWGS UP!".format(self.name)
 
     def driveChassisStraight(self, percentPower):
         ####################################

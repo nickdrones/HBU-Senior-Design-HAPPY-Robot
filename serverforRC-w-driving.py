@@ -60,9 +60,6 @@ kit=ServoKit(channels=16)
 
 print("Connection with PCA9685 Established")
 
-####################################
-## OTHER INITIALIZATION CODE HERE ##
-####################################
 
 print("Initialization Complete")
 print("")
@@ -94,20 +91,20 @@ while True:
 		if not data:
 			break
 		if data == ctrl_cmd[0]:
-			print('motor moving forward')
+			print('motor moving forward') # receive command "forward", move forward
 			driveChassisLR(100,100)
 		elif data == ctrl_cmd[1]:
-			print('recv backward cmd')
+			print('recv backward cmd') # receive command "backward", move backward
 			driveChassisLR(-100,-100)
 		elif data == ctrl_cmd[2]:
-			print('recv left cmd')
+			print('recv left cmd')   # receive command "left", move left
 			driveChassisLR(-100,100)
 		elif data == ctrl_cmd[3]:
-			print('recv right cmd')
+			print('recv right cmd')    # receive command "right", move right
 			driveChassisLR(100,-100)
 		elif data == ctrl_cmd[4]:
-			print('recv stop cmd')
-			stopAllMotors()
+			print('recv stop cmd')      # stop when receive stop command
+			stopAllMotors() 
 		else:
 			print('Command Error! Cannot recognize command: ' + str(data))
 

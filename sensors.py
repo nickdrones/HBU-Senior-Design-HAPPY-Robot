@@ -19,6 +19,7 @@ class GPS_sensor:
     
     # instance attributes
     def __init__(self):
+        #Help: https://github.com/JetsonHacksNano/UARTDemo/blob/master/uart_example.py
         self.serial_port = serial.Serial(port="/dev/ttyACM0",baudrate=115200,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,)
         # Have to run code as sudo to access serial port, or  serial access to all accounts using this command: "sudo chmod 666 /dev/ttyACM0"
         self.name = "Navi"
@@ -27,28 +28,28 @@ class GPS_sensor:
         self.comboCoords = ""
     
     def getLastLattitude(self):
-        self.serial_port.write("A".encode())
+        self.serial_port.write("A".encode())   #send "A" to arduino to make it return lattitude
         while True:
             if self.serial_port.inWaiting() > 0:
-                data = self.serial_port.readline().decode()
+                data = self.serial_port.readline().decode()  #read returned data and return as string
                 self.lastLatitude = data
                 break
         return self.lastLatitude
 
     def getLastLongitude(self):
-        self.serial_port.write("O".encode())
+        self.serial_port.write("O".encode())   #send "O" to arduino to make it return longitude
         while True:
             if self.serial_port.inWaiting() > 0:
-                data = self.serial_port.readline().decode()
+                data = self.serial_port.readline().decode()   #read returned data and return as string
                 self.lastLongitude = data
                 break
         return self.lastLongitude
  
     def getComboCoords(self):
-        self.serial_port.write("B".encode())
+        self.serial_port.write("B".encode())   #send "B" to arduino to make it return longitude and lattitude both
         while True:
             if self.serial_port.inWaiting() > 0:
-                data = self.serial_port.readline().decode()
+                data = self.serial_port.readline().decode()  #read returned data and return as string
                 self.comboCoords = data
                 break
         return self.comboCoords
@@ -58,49 +59,49 @@ class magnetometer:
         self.name = "Mando"
         self.tempVar=0
         self.sensorObject = i2c_hmc5883l.i2c_hmc5883l(1)
-        self.sensorObject.setContinuousMode()
-        self.sensorObject.setDeclination(2, 15)
+        self.sensorObject.setContinuousMode() #initilize magnetometer mode to continuous since we will poll it constantly
+        self.sensorObject.setDeclination(2, 15) #initilize magnetometer declination values to defaults (required)
     def getTempVar(self):
         return self.tempVar
     def getSensorInfo(self):
-        return str(self.sensorObject)
+        return str(self.sensorObject)  #return all code from sensor in standard form
     def getXaxis(self):
-        splittingString = str(self.sensorObject)
+        splittingString = str(self.sensorObject)            #read only first line of response from sensor, read number after ":"
         linesList = splittingString.split("\n")
         chosenLine = linesList[0]
         tempLineArr = chosenLine.split(':')
-        tempStringToReturn = tempLineArr[1].replace(" ", "")
-        return tempStringToReturn
+        tempStringToReturn = tempLineArr[1].replace(" ", "")  
+        return tempStringToReturn                   #return string
     def getYaxis(self):
-        splittingString = str(self.sensorObject)
+        splittingString = str(self.sensorObject)      #read only second line of response from sensor, read number after ":"
         linesList = splittingString.split("\n")
         chosenLine = linesList[1]
         tempLineArr = chosenLine.split(':')
         tempStringToReturn = tempLineArr[1].replace(" ", "")
-        return tempStringToReturn
+        return tempStringToReturn                     #return string
     def getZaxis(self):
-        splittingString = str(self.sensorObject)
+        splittingString = str(self.sensorObject)   #read only third line of response from sensor, read number after ":"
         linesList = splittingString.split("\n")
         chosenLine = linesList[2]
         tempLineArr = chosenLine.split(':')
         tempStringToReturn = tempLineArr[1].replace(" ", "")
-        return tempStringToReturn
+        return tempStringToReturn                #return string
     def getDeclination(self):
-        splittingString = str(self.sensorObject)
+        splittingString = str(self.sensorObject)     #read only fourth line of response from sensor, read number after ":" and before degrees indicator
         linesList = splittingString.split("\n")
         chosenLine = linesList[3]
         tempLineArr = chosenLine.split(':')
         middleStringArr = tempLineArr[1].split('°')
         tempStringToReturn = middleStringArr[0].replace(" ", "")
-        return tempStringToReturn
+        return tempStringToReturn                #return string
     def getHeading(self):
-        splittingString = str(self.sensorObject)
+        splittingString = str(self.sensorObject)           #read only fifth line of response from sensor, read number after ":" and before degrees indicator
         linesList = splittingString.split("\n")
         chosenLine = linesList[4]
         tempLineArr = chosenLine.split(':')
         middleStringArr = tempLineArr[1].split('°')
         tempStringToReturn = middleStringArr[0].replace(" ", "")
-        return tempStringToReturn
+        return tempStringToReturn                 #return string
 
 class primaryCamera:
     
@@ -195,12 +196,13 @@ class analog2digital:
         return self.tempVar
     def getBatteryVoltage(self):
         self.rawinputP0 = self.chan.value
+        
+        #Calculate and return voltage value from input analog value (math below)
         self.voltageToReturn = round(((50 * self.rawinputP0) + 617)/80205, 2)
         # y = 1604.1X - 12.34
         # x = (50y + 617)/80205
-        #MATH HERE TO CONVERT ANALOG VAL TO 0-12V VALUE
+        # This equation was created in Excel by measure the analog values at 0-12V, plotting them, and creating a best fit line to correlate the values
         return self.voltageToReturn
 
 
 
-#Help: https://github.com/JetsonHacksNano/UARTDemo/blob/master/uart_example.py

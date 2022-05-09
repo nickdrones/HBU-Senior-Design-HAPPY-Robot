@@ -62,7 +62,7 @@ time.sleep(1)
 
 print("Establishing Communication with LED bar to display status")
 try:
-    HAL = statusled.ledbar()
+    HAL = statusled.ledbar() #calls statusled code and creates object HAL
 except:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!")
     print("ERROR!!!")
@@ -78,7 +78,7 @@ time.sleep(1)
 
 print("Establishing Communication with Analog to Digital Converter")
 try:
-    Tyndale = sensors.analog2digital()
+    Tyndale = sensors.analog2digital() #call sensor library and initialize analog to digital converter as Tyndale
 except:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!")
     print("ERROR!!!")
@@ -89,13 +89,13 @@ else:
 
 print("")
 
-HAL.YellowCreepTo(5)
+HAL.YellowCreepTo(5) #fill in LED bar to reflect current status
 
 time.sleep(1)
 
 print("Establishing Communication with PCA9685 over I2C")
 try:
-    Hermes = drive_system.Chassis()
+    Hermes = drive_system.Chassis() #call drive_system code and initialize chassis as "Hermes"
 except:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!")
     print("ERROR!!!")
@@ -105,14 +105,14 @@ else:
     print("Connection with PCA9685 Established at default I2C address")
 print("")
 
-HAL.YellowCreepTo(10)
+HAL.YellowCreepTo(10) #fill in LED bar to reflect current status
 
 time.sleep(1)
 
 print("Establishing Communication with GPS module over Serial")
 print("Pausing for 5 seconds to allow sensor to connect to satellites")
 try:
-    Navi = sensors.GPS_sensor()
+    Navi = sensors.GPS_sensor() #call sensor code layer and initialize GPS to "Navi"
     time.sleep(5)
 except:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -123,22 +123,22 @@ else:
     print("Serial communication established at COM port /dev/ttyACM0")
 print("")
 
-HAL.YellowCreepTo(15)
+HAL.YellowCreepTo(15)  #fill in LED bar to reflect current status
 
 time.sleep(1)
 
 print("Initializing Nvidia Inference Libraries (This may take up to 30 seconds normally, or 15 minutes on a first boot)")
-Sauron = sensors.primaryCamera()
+Sauron = sensors.primaryCamera()     #load camera as Sauron and initialize Nvidia Libraries for Inference
 print("Inference Models successfully loaded to RAM")
 print("")
 
-HAL.YellowCreepTo(20)
+HAL.YellowCreepTo(20)  #fill in LED bar to reflect current status
 
 time.sleep(1)
 
 print("Establishing Communication with magnetometer over I2C")
 try:
-    Mando = sensors.magnetometer()
+    Mando = sensors.magnetometer() # create sensor object for magnetometer and wait as auto calibration completes
     time.sleep(5)
 except:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -149,7 +149,7 @@ else:
     print("Connection with magnetometer Established at default I2C address")
 print("")
 
-HAL.YellowCreepTo(24)
+HAL.YellowCreepTo(24)  #fill in LED bar to reflect current status
 
 time.sleep(1)
 
@@ -178,12 +178,17 @@ time.sleep(2)
 #    Sauron.processFrame()
 
 
+
+####################################
+# Code below initializes FLASK app
+####################################
 app = Flask(__name__)
 turbo = Turbo(app)
 
+#initialize list of usernames and passwords for accounts
 authorizedUsers = ["nickb","briand","luisc","drakel"]
 userPasswords = ["5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99","5f4dcc3b5aa765d61d8327deb882cf99"]
-#all accounts use password "password"
+#all accounts use password "password" in MD5 hash form
 
 @app.before_first_request
 def before_first_request():
@@ -191,6 +196,7 @@ def before_first_request():
 
 app.secret_key = 'Iridocyclitis'
 
+#function used to confirm current user is logged in
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -201,39 +207,42 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-
+#render index.html from static folder if user accesses root URL
 @app.route('/')
 @login_required
 def index():
     return render_template('index.html')
 
+
+#code for pulling username and password from webpage and logging user in
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
         indexofuser=-1
         for x in range(len(authorizedUsers)):
-            if str(request.form['username']) == authorizedUsers[x]:
+            if str(request.form['username']) == authorizedUsers[x]: #if the username entered is within the array, return the index of the user
                 indexofuser = x
-        tempHashVal = hashlib.md5(request.form['password'].encode())
+        tempHashVal = hashlib.md5(request.form['password'].encode())  #encode the entered password using MD5
         hashedEnteredPassword = tempHashVal.hexdigest()
-        if indexofuser < 0:
-            error = 'Invalid Username. Please try again.'
-        elif hashedEnteredPassword != userPasswords[x]:
-            error = 'Invalid Password. Please try again.'
+        if indexofuser < 0: 
+            error = 'Invalid Username. Please try again.' #returns if username is not in array
+        elif hashedEnteredPassword != userPasswords[x]:  
+            error = 'Invalid Password. Please try again.'   #returns if password hashes do not match
         else:
-            session['logged_in'] = True
+            session['logged_in'] = True    #if username and password are valid, logged_in is true
             flash('You were logged in.')
-            return redirect("/")
+            return redirect("/")          #redirect to webpage with robot info
     return render_template('login.html', error=error)
 
 @app.route('/logout')
 @login_required
 def logout():
-    session.pop('logged_in', None)
+    session.pop('logged_in', None)   #change variable to FALSE if user logs out
     flash('You were logged out.')
     return redirect(url_for('login'))
 
+#This function pulls data from the sensors and returns it in JSON format for TurboFlask to update on the webpage
 @app.context_processor
 def inject_data():
     headingtoreturn = Mando.getHeading()
@@ -248,7 +257,7 @@ def inject_data():
     return {'returnedHeading': headingtoreturn,'returnedGPS': gpsToReturn,'returnedVolt': voltagetoreturn, 'returnedstatus':currentjobstatus, 'lastcontacted':timesincelastservercontact,'returnednearestdestination':nearestdestinationtome,'distancetonearestdestination':distancetonearestdestinationtome}
 
 
-
+#This function designates the mini embedded templates to update with content every 1 second
 def update_load():
     with app.app_context():
         while True:
@@ -260,7 +269,7 @@ def update_load():
             turbo.push(turbo.replace(render_template('nearestdestination.html'), 'nearestdestination'))
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8080, host="172.17.21.145")
+    app.run(debug=False, port=8080, host="172.17.21.145")  #starts the app on the designated port and IP
 
 
 
